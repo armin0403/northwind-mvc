@@ -1,4 +1,4 @@
-namespace northwind_mvc.Models
+namespace NorthwindMVC.Models
 {
     public class ErrorViewModel
     {

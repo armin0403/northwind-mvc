@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-using Microsoft.Extensions.Hosting;
-using northwind_mvc.Models;
+using NorthwindMVC.Core;
 
-namespace northwind_mvc
+namespace NorthwindMVC.Infrastucture
 {
-    public class MyDBContext : DbContext
+    public class NorthwindDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
 

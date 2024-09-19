@@ -1,11 +1,11 @@
-using northwind_mvc;
+using NorthwindMVC;
+using NorthwindMVC.Infrastucture;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MyDBContext>();
-
+builder.Services.AddDbContext<NorthwindDbContext>();
 
 var app = builder.Build();
 

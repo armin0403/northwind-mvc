@@ -1,8 +1,6 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using northwind_mvc.Models;
 
-namespace northwind_mvc.Controllers
+namespace NorthwindMVC.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,12 +19,6 @@ namespace northwind_mvc.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

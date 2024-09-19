@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace northwind_mvc.Migrations
+namespace NorthwindMVC.Infrastucture.Migrations
 {
     /// <inheritdoc />
     public partial class Users : Migration

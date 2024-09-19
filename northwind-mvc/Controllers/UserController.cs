@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using northwind_mvc.Models;
 
-namespace northwind_mvc.Controllers
+namespace NorthwindMVC.Controllers
 {
     public class UserController : Controller
     {
@@ -10,8 +9,8 @@ namespace northwind_mvc.Controllers
             return View("LogIn");
         }
 
-        public IActionResult LogIn() 
-        { 
+        public IActionResult LogIn()
+        {
             return View();
         }
 
@@ -19,6 +18,5 @@ namespace northwind_mvc.Controllers
         {
             return View("SignUp");
         }
-
     }
 }
