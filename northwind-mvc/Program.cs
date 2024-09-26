@@ -2,6 +2,8 @@ using FluentValidation;
 using NorthwindMVC;
 using NorthwindMVC.Core;
 using NorthwindMVC.Infrastructure.Helpers.Validator;
+using NorthwindMVC.Infrastructure.Services;
+using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Infrastucture;
 using NorthwindMVC.ViewModels;
 
@@ -11,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<NorthwindDbContext>();
 builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();
