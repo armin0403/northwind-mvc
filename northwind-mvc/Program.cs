@@ -1,11 +1,17 @@
+using FluentValidation;
 using NorthwindMVC;
+using NorthwindMVC.Core;
+using NorthwindMVC.Infrastructure.Helpers.Validator;
 using NorthwindMVC.Infrastucture;
+using NorthwindMVC.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<NorthwindDbContext>();
+builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+
 
 var app = builder.Build();
 
