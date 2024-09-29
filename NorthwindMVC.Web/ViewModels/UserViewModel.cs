@@ -1,4 +1,4 @@
-﻿namespace NorthwindMVC.ViewModels
+﻿namespace NorthwindMVC.Web.ViewModels
 {
     public class UserViewModel
     {

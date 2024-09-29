@@ -1,11 +1,9 @@
 ﻿using FluentValidation;
-using NorthwindMVC.ViewModels;
+using NorthwindMVC.Web.ViewModels;
 
-
-
-namespace NorthwindMVC.Infrastructure.Helpers.Validator
+namespace NorthwindMVC.Web.Helpers
 {
-    public class UserViewModelValidator : AbstractValidator<UserViewModel>
+	public class UserViewModelValidator : AbstractValidator<UserViewModel>
     {
         public UserViewModelValidator()
         {

@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using NorthwindMVC.Infrastructure.Services;
-using NorthwindMVC.ViewModels;
-using NorthwindMVC.Core;
-using NorthwindMVC.Infrastructure.Helpers.Validator;
-using Microsoft.AspNetCore.Identity;
-using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using FluentValidation;
+using NorthwindMVC.Web.ViewModels;
 
-namespace NorthwindMVC.Controllers
+namespace NorthwindMVC.Web.Controllers
 {
-    public class UserController : Controller
+	public class UserController : Controller
 
     {
         private readonly IUserService _userSerivce;

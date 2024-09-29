@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NorthwindMVC.Infrastructure.Repositories;
+﻿using NorthwindMVC.Infrastructure.Repositories;
 using NorthwindMVC.Infrastucture;
 
 namespace NorthwindMVC.Infrastructure.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+	public class UnitOfWork : IUnitOfWork
     {
         private readonly NorthwindDbContext _dbContext;
+
+        private IUserRepository _userRepository;
+
         public UnitOfWork(NorthwindDbContext dbContext)
         {
             _dbContext = dbContext;
-            User = new UserRepository(dbContext);
+
+			UserRepository = _userRepository ??= new UserRepository(_dbContext);
         }
-        public IUserRepository User { get; private set; }
+
+        public IUserRepository UserRepository { get; private set; }
 
         public void Save()
         {

@@ -1,10 +1,10 @@
-﻿using NorthwindMVC.ViewModels;
-using Mapster;
+﻿using Mapster;
 using NorthwindMVC.Core;
+using NorthwindMVC.Web.ViewModels;
 
-namespace NorthwindMVC.Mapper
+namespace NorthwindMVC.Web.Mapper
 {
-    public static class UserMapper
+	public static class UserMapper
     {
         public static void UserMapperConfig() 
         {

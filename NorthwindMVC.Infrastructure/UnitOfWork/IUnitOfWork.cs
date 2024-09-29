@@ -4,7 +4,7 @@ namespace NorthwindMVC.Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IUserRepository User { get; }
+        IUserRepository UserRepository { get; }
         void Save();
     }
 }

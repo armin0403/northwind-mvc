@@ -1,11 +1,9 @@
 using FluentValidation;
-using NorthwindMVC;
-using NorthwindMVC.Core;
-using NorthwindMVC.Infrastructure.Helpers.Validator;
 using NorthwindMVC.Infrastructure.Services;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Infrastucture;
-using NorthwindMVC.ViewModels;
+using NorthwindMVC.Web.Helpers;
+using NorthwindMVC.Web.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
