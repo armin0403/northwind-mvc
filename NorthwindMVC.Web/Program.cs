@@ -1,4 +1,5 @@
 using FluentValidation;
+using MapsterMapper;
 using NorthwindMVC.Infrastructure.Services;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Infrastucture;
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<NorthwindDbContext>();
 builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMapper, Mapper>();
 
 
 var app = builder.Build();

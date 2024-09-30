@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NorthwindMVC.Core;
+﻿using NorthwindMVC.Core;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 
 namespace NorthwindMVC.Infrastructure.Services
@@ -15,6 +10,13 @@ namespace NorthwindMVC.Infrastructure.Services
         public UserService(IUnitOfWork unitOfWork) 
         {
             this.UnitOfWork = unitOfWork;
+        }
+
+        public bool Add(User user)
+        {
+            UnitOfWork.UserRepository.Add(user);
+            UnitOfWork.Save();
+            return true;
         }
 
         public Task<User> LogIn(string username, string password)

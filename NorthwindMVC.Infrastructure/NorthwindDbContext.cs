@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthwindMVC.Core;
-using NorthwindMVC.Core.Models;
 
 namespace NorthwindMVC.Infrastucture
 {
