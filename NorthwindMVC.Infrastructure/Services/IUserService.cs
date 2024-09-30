@@ -11,6 +11,6 @@ namespace NorthwindMVC.Infrastructure.Services
     public interface IUserService
     {
         Task<User> LogIn (string username, string password);
-        Task<User> SignUp (User user);
+        Task<User> SignUpAsync (User user);
     }
 }

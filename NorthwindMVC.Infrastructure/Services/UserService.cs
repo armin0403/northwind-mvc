@@ -23,7 +23,7 @@ namespace NorthwindMVC.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<User> SignUp(User user)
+        public Task<User> SignUpAsync(User user)
         {
             throw new NotImplementedException();
         }

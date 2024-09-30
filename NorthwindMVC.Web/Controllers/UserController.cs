@@ -11,10 +11,12 @@ namespace NorthwindMVC.Web.Controllers
         private readonly IUserService _userSerivce;
         private readonly IValidator<UserViewModel> _validator;
 
-        public UserController(IUserService UserService, IValidator<UserViewModel> UserViewModelValidator) 
+        public UserController(IUserService UserService, 
+                              IValidator<UserViewModel> UserViewModelValidator) 
         {
             _userSerivce = UserService;
             _validator = UserViewModelValidator;
+            
         }
        
         public IActionResult Index()
@@ -41,8 +43,15 @@ namespace NorthwindMVC.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(UserViewModel model)
         {
-                                  
-          
+            ModelState.Clear();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            _
+            await _userSerivce.SignUpAsync(model);
+
             return View(model);
         }
     }
