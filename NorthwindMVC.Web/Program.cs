@@ -1,11 +1,21 @@
-using NorthwindMVC;
+using FluentValidation;
+using MapsterMapper;
+using NorthwindMVC.Infrastructure.Services;
+using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Infrastucture;
+using NorthwindMVC.Web.Helpers;
+using NorthwindMVC.Web.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<NorthwindDbContext>();
+builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMapper, Mapper>();
+
 
 var app = builder.Build();
 
