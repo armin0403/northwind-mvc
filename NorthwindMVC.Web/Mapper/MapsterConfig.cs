@@ -2,7 +2,7 @@
 {
     public static class MapsterConfig
     {
-        public static void RegisterMapsterConfiguration (this IServiceCollection Service)
+        public static void RegisterMapsterConfiguration (this IServiceCollection service)
         {
             UserConfig.UserMapperConfig();
         }
