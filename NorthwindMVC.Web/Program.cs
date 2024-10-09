@@ -1,6 +1,6 @@
 using FluentValidation;
 using MapsterMapper;
-using NorthwindMVC.Infrastructure.Services;
+using NorthwindMVC.Services;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Infrastucture;
 using NorthwindMVC.Web.Helpers;
@@ -15,6 +15,15 @@ builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IMapper, Mapper>();
+
+builder.Services.AddDistributedMemoryCache(); // for sessions
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+}); //for sessions
 
 
 var app = builder.Build();
@@ -33,6 +42,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession(); // for sessions
 
 app.MapControllerRoute(
     name: "default",

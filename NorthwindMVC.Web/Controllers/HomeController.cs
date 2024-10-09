@@ -13,7 +13,11 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                return View();
+            }
+            return RedirectToAction("LogIn", "User");
         }
 
         public IActionResult Privacy()

@@ -49,7 +49,6 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
-                @Html.ValidationSummary()
                 <form method="post" asp-controller="User" asp-action="SignUp">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="First name" asp-for="FirstName">
@@ -58,7 +57,10 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
+                    <div>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Last name" asp-for="LastName">
                         <div class="input-group-append">
@@ -66,6 +68,9 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
@@ -75,6 +80,9 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" asp-for="Username">
                         <div class="input-group-append">
@@ -82,6 +90,9 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" asp-for="Email">
@@ -91,6 +102,9 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Password" asp-for="Password">
                         <div class="input-group-append">
@@ -99,6 +113,9 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Retype password" asp-for="ConfirmPassword">
                         <div class="input-group-append">
@@ -106,6 +123,9 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -123,24 +143,12 @@
                         <!-- /.col -->
                     </div>
                 </form>
-
-                <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i>
-                        Sign up using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i>
-                        Sign up using Google+
-                    </a>
-                </div>
-
                 <a asp-controller="User" asp-action="LogIn" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
+
     <!-- /.register-box -->
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -167,6 +175,8 @@
     <script src="../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
     <!-- dropzonejs -->
     <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
+
+    
 
     <script>
         $('#reservationdate').datetimepicker({

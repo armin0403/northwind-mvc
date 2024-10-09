@@ -7,8 +7,12 @@ namespace NorthwindMVC.Infrastructure.Repositories
 
     {
         public UserRepository(NorthwindDbContext dbContext) : base(dbContext)
-        {            
+        {
         }
 
+        public User GetByUsernameOrEmailAsync(string usernameOrEmail)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
+        }
     }
 }
