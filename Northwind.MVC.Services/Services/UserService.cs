@@ -1,7 +1,7 @@
 ﻿using NorthwindMVC.Core;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 
-namespace NorthwindMVC.Infrastructure.Services
+namespace NorthwindMVC.Services
 {
     public class UserService : IUserService
     {
@@ -19,15 +19,9 @@ namespace NorthwindMVC.Infrastructure.Services
             return true;
         }
 
-        public Task<User> LogIn(string username, string password)
+        public User? GetByUsernameOrEmail(string usernameOrEmail)
         {
-
-            throw new NotImplementedException();
-        }
-
-        public Task<User> SignUpAsync(User user)
-        {
-            throw new NotImplementedException();
+            return UnitOfWork.UserRepository.GetByUsernameOrEmailAsync(usernameOrEmail);
         }
     }
 }
