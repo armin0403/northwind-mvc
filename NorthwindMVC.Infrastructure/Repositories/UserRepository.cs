@@ -14,5 +14,10 @@ namespace NorthwindMVC.Infrastructure.Repositories
         {
             return _dbContext.Users.FirstOrDefault(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
         }
-    }
+
+		public User GetUserById(int id)
+		{
+			return _dbContext.Users.FirstOrDefault(u => u.Id == id);
+		}
+	}
 }

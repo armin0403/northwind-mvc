@@ -23,5 +23,10 @@ namespace NorthwindMVC.Services
         {
             return UnitOfWork.UserRepository.GetByUsernameOrEmailAsync(usernameOrEmail);
         }
-    }
+
+		public User GetUserById(int id)
+		{
+			return UnitOfWork.UserRepository.GetUserById(id);
+		}
+	}
 }

@@ -12,7 +12,7 @@ namespace NorthwindMVC.Web.Controllers
 	public class UserController : Controller
 
     {
-        private readonly IUserService _userSerivce;
+        private readonly IUserService _userService;
         private readonly IValidator<UserViewModel> _validator;
         private readonly IMapper _mapper;
 
@@ -20,7 +20,7 @@ namespace NorthwindMVC.Web.Controllers
                               IValidator<UserViewModel> validator,
                               IMapper Mapper) 
         {
-            _userSerivce = UserService;
+            _userService = UserService;
             _validator = validator;
             _mapper = Mapper; 
         }
@@ -35,6 +35,15 @@ namespace NorthwindMVC.Web.Controllers
             return View();
         }
 
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogIn(UserLogInViewModel model)
@@ -46,7 +55,7 @@ namespace NorthwindMVC.Web.Controllers
                 return View(model);
             }
 
-            var user = _userSerivce.GetByUsernameOrEmail(model.UsernameOrEmail);
+            var user = _userService.GetByUsernameOrEmail(model.UsernameOrEmail);
             if (user == null || model.Password == null)
             {
                 ModelState.AddModelError(string.Empty, "Password or username/email incorrect!");
@@ -64,6 +73,7 @@ namespace NorthwindMVC.Web.Controllers
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Email", user.Email);
 
+            
             TempData["SuccessLogin"] = "You've been successfully logged in!";
             return RedirectToAction("Index", "Home");
         }
@@ -102,7 +112,7 @@ namespace NorthwindMVC.Web.Controllers
                 PasswordSalt = passwordSalt,
             };
 
-            _userSerivce.Add(entity);
+            _userService.Add(entity);
 
             return RedirectToAction("Index", "Home");
         }
