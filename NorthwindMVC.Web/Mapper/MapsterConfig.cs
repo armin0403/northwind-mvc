@@ -1,4 +1,4 @@
-﻿namespace NorthwindMVC.Web.Mapper
+﻿namespace NorthwindMVC.Web
 {
     public static class MapsterConfig
     {

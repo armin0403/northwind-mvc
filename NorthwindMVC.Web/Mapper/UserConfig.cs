@@ -2,7 +2,7 @@
 using NorthwindMVC.Core;
 using NorthwindMVC.Web.ViewModels;
 
-namespace NorthwindMVC.Web.Mapper
+namespace NorthwindMVC.Web
 {
 	public static class UserConfig
     {

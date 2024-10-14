@@ -8,17 +8,14 @@ namespace NorthwindMVC.Infrastucture
     {
         private readonly IConfiguration _configuration;
 
-        public NorthwindDbContext(IConfiguration configuration) 
-        
-        {
-            _configuration = configuration;
-        }
+        public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options, IConfiguration configuration) 
+            : base(options)
+		{
+			_configuration = configuration;
+		}
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-           => optionsBuilder.UseNpgsql(_configuration.GetConnectionString("NorthwindConnection"));
     }
 }
