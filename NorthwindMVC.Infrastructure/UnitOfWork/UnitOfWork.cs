@@ -1,4 +1,5 @@
-﻿using NorthwindMVC.Infrastructure.Repositories;
+﻿using System.Runtime.CompilerServices;
+using NorthwindMVC.Infrastructure.Repositories;
 using NorthwindMVC.Infrastucture;
 
 namespace NorthwindMVC.Infrastructure.UnitOfWork
@@ -18,9 +19,11 @@ namespace NorthwindMVC.Infrastructure.UnitOfWork
 
         public IUserRepository UserRepository { get; private set; }
 
-        public void Save()
+        public async Task<int> SaveChangesAsync()
         {
-            _dbContext.SaveChanges();
+          return await _dbContext.SaveChangesAsync();           
         }
+
+        
     }
 }

@@ -12,21 +12,21 @@ namespace NorthwindMVC.Services
             this.UnitOfWork = unitOfWork;
         }
 
-        public bool Add(User user)
+        public async Task<bool> Add(User user)
         {
-            UnitOfWork.UserRepository.Add(user);
-            UnitOfWork.Save();
+            await UnitOfWork.UserRepository.AddAsync(user);
+            await UnitOfWork.SaveChangesAsync();
             return true;
         }
 
-        public User? GetByUsernameOrEmail(string usernameOrEmail)
+        public async Task<User> GetByUsernameOrEmail(string usernameOrEmail)
         {
-            return UnitOfWork.UserRepository.GetByUsernameOrEmailAsync(usernameOrEmail);
+            return await UnitOfWork.UserRepository.GetByUsernameOrEmailAsync(usernameOrEmail);
         }
 
-		public User GetUserById(int id)
+		public async Task<User> GetUserById(int id)
 		{
-			return UnitOfWork.UserRepository.GetUserById(id);
+			return await UnitOfWork.UserRepository.GetUserById(id);
 		}
 	}
 }

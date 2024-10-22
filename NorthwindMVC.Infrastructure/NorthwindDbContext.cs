@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using NorthwindMVC.Core;
 
-namespace NorthwindMVC.Infrastucture
+namespace NorthwindMVC.Infrastructure
 {
     public class NorthwindDbContext : DbContext
     {

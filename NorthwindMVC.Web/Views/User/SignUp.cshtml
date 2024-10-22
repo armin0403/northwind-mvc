@@ -43,12 +43,11 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="@Url.Action("Index", "Home")"><b>Admin</b>LTE</a>
+            <a href="@Url.Action("Index", "Home")"><b>Northwind</b></a>
         </div>
-
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">Register</p>
                 <form method="post" asp-controller="User" asp-action="SignUp">
                     <div>
                         <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -128,25 +127,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    I agree to the <a href="#">terms</a>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
+                        <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
-                        <!-- /.col -->
                     </div>
                 </form>
-                <a asp-controller="User" asp-action="LogIn" class="text-center">I already have a membership</a>
+                <a asp-controller="User" asp-action="LogIn" class="text-center">Already have an account</a>
             </div>
-            <!-- /.form-box -->
-        </div><!-- /.card -->
+        </div>
     </div>
 
     <!-- /.register-box -->

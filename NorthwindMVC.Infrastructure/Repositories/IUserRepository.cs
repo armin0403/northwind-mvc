@@ -4,7 +4,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        User? GetByUsernameOrEmailAsync(string usernameOrEmail);
-        User GetUserById(int id);
+        Task<User> GetByUsernameOrEmailAsync(string usernameOrEmail);
+        Task<User> GetUserById(int id);
     }
 }

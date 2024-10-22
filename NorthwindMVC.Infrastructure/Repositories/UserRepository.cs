@@ -1,5 +1,6 @@
-﻿using NorthwindMVC.Core;
-using NorthwindMVC.Infrastucture;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthwindMVC.Core;
+using NorthwindMVC.Infrastructure;
 
 namespace NorthwindMVC.Infrastructure.Repositories
 {
@@ -10,14 +11,14 @@ namespace NorthwindMVC.Infrastructure.Repositories
         {
         }
 
-        public User GetByUsernameOrEmailAsync(string usernameOrEmail)
+        public async Task<User> GetByUsernameOrEmailAsync(string usernameOrEmail)
         {
-            return _dbContext.Users.FirstOrDefault(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
         }
 
-		public User GetUserById(int id)
+		public async Task<User> GetUserById(int id)
 		{
-			return _dbContext.Users.FirstOrDefault(u => u.Id == id);
+			return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
 		}
 	}
 }

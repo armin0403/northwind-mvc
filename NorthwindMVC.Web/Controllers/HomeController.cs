@@ -1,8 +1,12 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using NorthwindMVC.Core;
 using NorthwindMVC.Services;
+using NorthwindMVC.Web.AuthConfig;
 
 namespace NorthwindMVC.Web.Controllers
 {
+    [CustomAuthenticationFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,15 +21,8 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult Index()
         {
-			var userId = HttpContext.Session.GetInt32("UserId");
-
-			if (userId != null)
-            {              
-				var currentUser = _userService.GetUserById(userId.Value);
-                return View(currentUser);
-            }
-
-            return RedirectToAction("LogIn", "User");
+            
+            return View();
         }
 
         public IActionResult Privacy()

@@ -4,9 +4,9 @@ namespace NorthwindMVC.Services
 {
     public interface IUserService
     {
-        User? GetByUsernameOrEmail(string usernameOrEmail);
-        User GetUserById(int id);
-        bool Add (User user);
+        Task<User> GetByUsernameOrEmail(string usernameOrEmail);
+        Task<User> GetUserById(int id);
+        Task<bool> Add (User user);
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Text.Json;
+using FluentValidation;
 using FluentValidation.Results;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +25,15 @@ namespace NorthwindMVC.Web.Controllers
             _validator = validator;
             _mapper = Mapper; 
         }
-       
+
+        
         public IActionResult Index()
         {
             return View("LogIn");
         }
 
-        public IActionResult LogIn()
+		[HttpGet]
+		public IActionResult LogIn()
         {
             return View();
         }
@@ -46,7 +49,7 @@ namespace NorthwindMVC.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult LogIn(UserLogInViewModel model)
+        public async Task<IActionResult> LogInAsync(UserLogInViewModel model)
         {
             ModelState.Clear();
             if (!ModelState.IsValid)
@@ -55,7 +58,7 @@ namespace NorthwindMVC.Web.Controllers
                 return View(model);
             }
 
-            var user = _userService.GetByUsernameOrEmail(model.UsernameOrEmail);
+            var user = await _userService.GetByUsernameOrEmail(model.UsernameOrEmail);
             if (user == null || model.Password == null)
             {
                 ModelState.AddModelError(string.Empty, "Password or username/email incorrect!");
@@ -68,16 +71,13 @@ namespace NorthwindMVC.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Password or username/email incorrect!");
                 return View(model);
             }
+            string jsonString = JsonSerializer.Serialize(model);
+            HttpContext.Session.SetString("UserData", jsonString);
 
-            HttpContext.Session.SetString("Username", user.Username);
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetString("Email", user.Email);
-
-            
             TempData["SuccessLogin"] = "You've been successfully logged in!";
             return RedirectToAction("Index", "Home");
         }
-
+        
         public IActionResult SignUp()
         {
             return View("SignUp");
