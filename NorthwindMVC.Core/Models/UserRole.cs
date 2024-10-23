@@ -1,11 +1,12 @@
-﻿namespace NorthwindMVC.Core;
-    public class UserRole
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
-        public IEnumerable<Role> Roles { get; set;}
-    }
-
+﻿namespace NorthwindMVC.Core
+{
+	public class UserRole
+	{
+		public int Id { get; set; }
+		public int UserId { get; set; }
+		public User User { get; set; }
+		public int RoleId { get; set; }
+		public Role Role { get; set; }
+		public List<Role> Roles { get; set; }
+	}
+}
