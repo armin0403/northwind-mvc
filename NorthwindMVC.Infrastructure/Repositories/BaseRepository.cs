@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using NorthwindMVC.Infrastucture;
 
 namespace NorthwindMVC.Infrastructure.Repositories
@@ -11,9 +12,9 @@ namespace NorthwindMVC.Infrastructure.Repositories
         {
            _dbContext = dbContext;
         }
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Add(entity);
+           await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
         public void Delete(TEntity entity)
@@ -26,9 +27,9 @@ namespace NorthwindMVC.Infrastructure.Repositories
             return _dbContext.Set<TEntity>().Where(predicte);
         }
 
-        public TEntity Get(int id)
+        public async Task<TEntity> Get(int id)
         {
-            return _dbContext.Set<TEntity>().Find(id);
+           return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -36,7 +37,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
             return _dbContext.Set<TEntity>().ToList();
         }
 
-        public void Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
            _dbContext.Set<TEntity>().Update(entity);
         }
