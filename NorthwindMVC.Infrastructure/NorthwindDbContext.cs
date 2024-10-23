@@ -1,18 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using NorthwindMVC.Core;
 
 namespace NorthwindMVC.Infrastructure
 {
     public class NorthwindDbContext : DbContext
     {
-        private readonly IConfiguration _configuration;
-
-        public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options, IConfiguration configuration) 
-            : base(options)
-		{
-			_configuration = configuration;
-		}
+        public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options)
+            : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
