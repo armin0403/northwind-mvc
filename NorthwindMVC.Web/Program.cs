@@ -1,21 +1,8 @@
-using FluentValidation;
-using MapsterMapper;
-using NorthwindMVC.Infrastructure.Services;
-using NorthwindMVC.Infrastructure.UnitOfWork;
-using NorthwindMVC.Infrastucture;
-using NorthwindMVC.Web.Helpers;
-using NorthwindMVC.Web.ViewModels;
+using NorthwindMVC.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<NorthwindDbContext>();
-builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IMapper, Mapper>();
-
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 
@@ -33,6 +20,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession(); // for sessions
 
 app.MapControllerRoute(
     name: "default",

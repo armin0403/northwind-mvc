@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Northwind.MVC.Services\NorthwindMVC.Services.csproj" />
     <ProjectReference Include="..\NorthwindMVC.Core\NorthwindMVC.Core.csproj" />
     <ProjectReference Include="..\NorthwindMVC.Infrastructure\NorthwindMVC.Infrastructure.csproj" />
   </ItemGroup>

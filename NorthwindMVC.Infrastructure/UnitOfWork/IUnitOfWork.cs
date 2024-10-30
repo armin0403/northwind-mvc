@@ -5,6 +5,6 @@ namespace NorthwindMVC.Infrastructure.UnitOfWork
     public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
-        void Save();
+        Task<int> SaveChangesAsync();
     }
 }

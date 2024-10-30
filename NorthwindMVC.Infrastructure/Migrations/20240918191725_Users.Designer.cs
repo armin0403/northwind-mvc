@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NorthwindMVC.Infrastucture;
+using NorthwindMVC.Infrastructure;
 
 #nullable disable
 
