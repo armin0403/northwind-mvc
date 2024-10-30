@@ -10,35 +10,33 @@ using NorthwindMVC.Web.ViewModels;
 
 namespace NorthwindMVC.Web.Controllers
 {
-	public class UserController : Controller
+    public class UserController : Controller
 
     {
         private readonly IUserService _userService;
         private readonly IValidator<UserViewModel> _validator;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService UserService, 
+        public UserController(IUserService UserService,
                               IValidator<UserViewModel> validator,
-                              IMapper Mapper) 
+                              IMapper Mapper)
         {
             _userService = UserService;
             _validator = validator;
-            _mapper = Mapper; 
+            _mapper = Mapper;
         }
 
-        
         public IActionResult Index()
         {
             return View("LogIn");
         }
 
-		[HttpGet]
-		public IActionResult LogIn()
+        [HttpGet]
+        public IActionResult LogIn()
         {
             return View();
         }
 
-       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOut()
@@ -64,7 +62,7 @@ namespace NorthwindMVC.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Password or username/email incorrect!");
                 return View(model);
             }
-                        
+
             var passwordHash = PasswordHelper.CreateHash(model.Password, user.PasswordSalt);
             if (user.PasswordHash != passwordHash)
             {
@@ -77,7 +75,7 @@ namespace NorthwindMVC.Web.Controllers
             TempData["SuccessLogin"] = "You've been successfully logged in!";
             return RedirectToAction("Index", "Home");
         }
-        
+
         public IActionResult SignUp()
         {
             return View("SignUp");

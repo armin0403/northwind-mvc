@@ -1,18 +1,15 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using NorthwindMVC.Core;
 using NorthwindMVC.Services;
-using NorthwindMVC.Web.AuthConfig;
 
 namespace NorthwindMVC.Web.Controllers
 {
-    [CustomAuthenticationFilter]
+    [AuthenticationFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-		private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
-		public HomeController(ILogger<HomeController> logger,
+        public HomeController(ILogger<HomeController> logger,
                               IUserService userService)
         {
             _logger = logger;
@@ -21,7 +18,6 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 
