@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <!-- custom -->
+    <link rel="stylesheet" href="css/custom.css">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -55,23 +57,25 @@
           <a href="#" class="d-block"></a>
         </div>
       </div>
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a asp-action="Index" asp-controller="Home" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Home
-              </p>
-            </a>
-          </li>                        
-        </ul>
-      </nav>
-      <form asp-action="Logout" asp-controller="User">
-        <button class="btn btn-secondary" style="position: absolute; bottom: 20px; left: 20px; right: 20px;">
-            <i class="fas fa-sign-out-alt">Log out</i>
-        </button>
-      </form>
+    <div class="d-flex flex-column justify-content-between h-90">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a asp-action="Index" asp-controller="Home" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Home
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <form asp-action="Logout" asp-controller="User">
+            <button class="btn btn-secondary w-100">
+                <i class="fas fa-sign-out-alt">Log out</i>
+            </button>
+        </form>
+     </div>
     </div>
   </aside>
     <div class="content-wrapper">
