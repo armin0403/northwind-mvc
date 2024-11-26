@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using FluentValidation;
 using FluentValidation.Results;
 using MapsterMapper;
@@ -26,16 +27,24 @@ namespace NorthwindMVC.Web.Controllers
             _mapper = Mapper;
         }
 
+
         public IActionResult Index()
         {
+            var currentLanguage = CultureInfo.CurrentCulture.Name;
+            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
+            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View("LogIn");
         }
 
         [HttpGet]
         public IActionResult LogIn()
         {
+            var currentLanguage = CultureInfo.CurrentCulture.Name;
+            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
+            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,6 +87,9 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult SignUp()
         {
+            var currentLanguage = CultureInfo.CurrentCulture.Name;
+            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
+            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View("SignUp");
         }
 

@@ -1,23 +1,26 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
+using NorthwindMVC.Web.Resources;
 using NorthwindMVC.Web.ViewModels;
+
 
 namespace NorthwindMVC.Web.Helpers
 {
-	public class UserViewModelValidator : AbstractValidator<UserViewModel>
+    public class UserViewModelValidator : AbstractValidator<UserViewModel>
     {
-        public UserViewModelValidator()
+        public UserViewModelValidator(IStringLocalizer<Resources.Resources> localizer)
         {
-                RuleFor(x => x.FirstName).Length(1, 10).WithMessage("First name must be between 1 and 10 characters.")
-                                         .NotEmpty().WithMessage("First name required!");
-                RuleFor(x => x.LastName).Length(1, 10).WithMessage("Last name must be between 1 and 10 characters.")
-                                        .NotEmpty().WithMessage("Last name required!");
-                RuleFor(x => x.DateOfBirth).Must(BeAtLeast18YearsOld).WithMessage("Must be 18 or older!")
-                                           .NotEmpty().WithMessage("Date of birth required!");
-                RuleFor(x => x.Username).NotEmpty().WithMessage("Username required!");
-                RuleFor(x => x.Email).EmailAddress().NotEmpty().WithMessage("Email required!");
-                RuleFor(x => x.Password).Length(8, 18).NotEmpty().WithMessage("Password required!");
-                RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage("Must be same as password!")
-                                               .NotEmpty().WithMessage("Please confirm your password");
+            RuleFor(x => x.FirstName).Length(1, 10).WithMessage(localizer["FirstNameValidationLenght"])
+                                     .NotEmpty().WithMessage(localizer["FirstNameValidationRequired"]);
+            RuleFor(x => x.LastName).Length(1, 10).WithMessage(localizer["LastNameValidationLenght"])
+                                    .NotEmpty().WithMessage(localizer["LastNameValidationRequired"]);
+            RuleFor(x => x.DateOfBirth).Must(BeAtLeast18YearsOld).WithMessage("Must be 18 or older!")
+                                       .NotEmpty().WithMessage(localizer["DateOfBirthValidationRequired"]);
+            RuleFor(x => x.Username).NotEmpty().WithMessage(localizer["UsernameValidationRequired"]);
+            RuleFor(x => x.Email).EmailAddress().NotEmpty().WithMessage(localizer["EmailValidationRequired"]);
+            RuleFor(x => x.Password).Length(8, 18).NotEmpty().WithMessage(localizer["PasswordValidationRequired"]);
+            RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage(localizer["ConfirmPasswordValidation"])
+                                           .NotEmpty().WithMessage(localizer["ConfirmPasswordValidationRequired"]);
         }
 
         private bool BeAtLeast18YearsOld(DateOnly dateOfBirth)
@@ -25,9 +28,9 @@ namespace NorthwindMVC.Web.Helpers
             var today = DateOnly.FromDateTime(DateTime.Today);
             var age = today.Year - dateOfBirth.Year;
 
-            if (dateOfBirth > today.AddYears(-age)) 
+            if (dateOfBirth > today.AddYears(-age))
             {
-                age--; 
+                age--;
             }
             return age > 18;
         }

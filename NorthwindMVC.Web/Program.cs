@@ -1,10 +1,37 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using NorthwindMVC.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.RegisterServices();
+builder.Services.AddLocalization();
+builder.Services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
 
 var app = builder.Build();
+
+var defaultDataCulture = "bs-Latn-BA";
+var ci = new CultureInfo(defaultDataCulture);
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(ci),
+    SupportedCultures = new List<CultureInfo>
+    {
+        ci,
+        new CultureInfo("en-US")
+    },
+    SupportedUICultures = new List<CultureInfo>
+    {
+        ci,
+        new CultureInfo("en-US")
+    }
+});
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -14,14 +41,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession(); // for sessions
+
 app.UseAuthorization();
 
-app.UseSession(); // for sessions
 
 app.MapControllerRoute(
     name: "default",
