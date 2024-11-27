@@ -1,4 +1,8 @@
 ﻿@using NorthwindMVC.Web.ViewModels
+@using NorthwindMVC.Services;
+
+@inject LanguageService LanguageService;
+
 @model UserViewModel;
 
 @{
@@ -12,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Registration Page</title>
 
-    
+
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
@@ -38,7 +42,8 @@
     <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- dropzonejs -->
     <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
-
+    <!--Flags-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
 </head>
 <body class="hold-transition register-page">
     <div class="register-box">
@@ -53,7 +58,7 @@
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="First name" asp-for="FirstName">
+                        <input type="text" class="form-control" placeholder="@Translate["FirstName"]" asp-for="FirstName">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -64,7 +69,7 @@
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Last name" asp-for="LastName">
+                        <input type="text" class="form-control" placeholder="@Translate["LastName"]" asp-for="LastName">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -76,7 +81,7 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="Date of Birth" asp-for="DateOfBirth"/>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="@Translate["Dateofbirth"]" asp-for="DateOfBirth" />
                             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -86,7 +91,7 @@
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" asp-for="Username">
+                        <input type="text" class="form-control" placeholder="@Translate["Username"]" asp-for="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -97,7 +102,7 @@
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email" asp-for="Email">
+                        <input type="email" class="form-control" placeholder="@Translate["Email"]" asp-for="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -108,7 +113,7 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+                        <input type="password" class="form-control" placeholder="@Translate["Password"]" asp-for="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -119,7 +124,7 @@
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password" asp-for="ConfirmPassword">
+                        <input type="password" class="form-control" placeholder="@Translate["Password"]" asp-for="ConfirmPassword">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -128,11 +133,30 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block">@Translate["Register"]</button>
                         </div>
                     </div>
                 </form>
-                <a asp-controller="User" asp-action="LogIn" class="text-center">Already have an account</a>
+                <div class="d-flex justify-content-between mt-3">
+
+                    <a asp-controller="User" asp-action="LogIn" class="text-center">
+                        @Translate["SignInHere"]
+                    </a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="languageDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fi fi-@LanguageService.GetCurrentLanguage()"></i> @LanguageService.GetCurrentLanguage()
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">
+                                <i class="fi fi-us fis"></i> @Translate["English"]
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="bs-Latn-BA" class="dropdown-item">
+                                <i class="fi fi-ba fis"></i> @Translate["Bosnian"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -164,7 +188,7 @@
     <!-- dropzonejs -->
     <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
 
-    
+
 
     <script>
         $('#reservationdate').datetimepicker({

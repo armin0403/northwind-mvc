@@ -1,8 +1,13 @@
-﻿@model NorthwindMVC.Web.ViewModels.UserLogInViewModel;
+﻿@using NorthwindMVC.Services;
+
+@inject LanguageService LanguageService;
+
+@model NorthwindMVC.Web.ViewModels.UserLogInViewModel;
 
 @{
     Layout = null;
 }
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -17,6 +22,8 @@
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!--Flags-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -25,35 +32,49 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg"> @Translate["SignInHere"]</p>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <form id="quickForm" method="post" asp-controller="User" asp-action="LogIn">
                     @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Email" asp-for="UsernameOrEmail">
+                        <input type="text" class="form-control" placeholder="@Translate["Email"]" asp-for="UsernameOrEmail">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+                        <input type="password" class="form-control" placeholder="@Translate["Password"]" asp-for="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">@Translate["LogIn"]</button>
                         </div>
                     </div>
                 </form>
-                <p class="mb-0">
-                    <a class="text-center" asp-controller="User" asp-action="SignUp">Register</a>
-                </p>
+                <div class="d-flex justify-content-between mt-3">
+                    <a class="text-center" asp-controller="User" asp-action="SignUp">@Translate["RegisterHere"]</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="languageDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fi fi-@LanguageService.GetCurrentLanguage()"></i> @LanguageService.GetCurrentLanguage()
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">
+                                <i class="fi fi-us fis"></i> @Translate["English"]
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="bs-Latn-BA" class="dropdown-item">
+                                <i class="fi fi-ba fis"></i> @Translate["Bosnian"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,7 +85,7 @@
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-      
+
 
 </body>
 </html>

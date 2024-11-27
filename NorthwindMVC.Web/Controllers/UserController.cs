@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using NorthwindMVC.Core;
 using NorthwindMVC.Services;
 using NorthwindMVC.Web.Helpers.PasswordHelper;
 using NorthwindMVC.Web.ViewModels;
+using System.Text.Json;
 
 namespace NorthwindMVC.Web.Controllers
 {
@@ -26,6 +26,7 @@ namespace NorthwindMVC.Web.Controllers
             _mapper = Mapper;
         }
 
+
         public IActionResult Index()
         {
             return View("LogIn");
@@ -36,6 +37,7 @@ namespace NorthwindMVC.Web.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
