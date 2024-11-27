@@ -1,4 +1,9 @@
-﻿@model User;
+﻿@using System;
+@using NorthwindMVC.Services;
+
+@inject LanguageService LanguageService;
+
+@model User;
 
 <head>
     <meta charset="utf-8" />
@@ -41,7 +46,7 @@
                 <div class="navbar-nav ml-auto">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" id="languageDropdown" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fi fi-@ViewData["SelectedFlag"]"></i> @ViewData["SelectedLanguage"]
+                            <i class="fi fi-@LanguageService.GetCurrentLanguage()"></i> @LanguageService.GetCurrentLanguage()
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">

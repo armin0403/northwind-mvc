@@ -1,9 +1,12 @@
-﻿@model NorthwindMVC.Web.ViewModels.UserLogInViewModel;
+﻿@using NorthwindMVC.Services;
+
+@inject LanguageService LanguageService;
+
+@model NorthwindMVC.Web.ViewModels.UserLogInViewModel;
 
 @{
     Layout = null;
 }
-
 
 <html lang="en">
 <head>
@@ -59,7 +62,7 @@
                     <a class="text-center" asp-controller="User" asp-action="SignUp">@Translate["RegisterHere"]</a>
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" id="languageDropdown" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fi fi-@ViewData["SelectedFlag"]"></i> @ViewData["SelectedLanguage"]
+                            <i class="fi fi-@LanguageService.GetCurrentLanguage()"></i> @LanguageService.GetCurrentLanguage()
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">

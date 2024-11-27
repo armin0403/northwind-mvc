@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Text.Json;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +6,7 @@ using NorthwindMVC.Core;
 using NorthwindMVC.Services;
 using NorthwindMVC.Web.Helpers.PasswordHelper;
 using NorthwindMVC.Web.ViewModels;
+using System.Text.Json;
 
 namespace NorthwindMVC.Web.Controllers
 {
@@ -30,18 +29,12 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult Index()
         {
-            var currentLanguage = CultureInfo.CurrentCulture.Name;
-            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
-            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View("LogIn");
         }
 
         [HttpGet]
         public IActionResult LogIn()
         {
-            var currentLanguage = CultureInfo.CurrentCulture.Name;
-            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
-            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View();
         }
 
@@ -87,9 +80,6 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult SignUp()
         {
-            var currentLanguage = CultureInfo.CurrentCulture.Name;
-            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
-            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View("SignUp");
         }
 

@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Localization;
-using NorthwindMVC.Web.Resources;
 using NorthwindMVC.Web.ViewModels;
-
 
 namespace NorthwindMVC.Web.Helpers
 {
@@ -10,9 +8,9 @@ namespace NorthwindMVC.Web.Helpers
     {
         public UserViewModelValidator(IStringLocalizer<Resources.Resources> localizer)
         {
-            RuleFor(x => x.FirstName).Length(1, 10).WithMessage(localizer["FirstNameValidationLenght"])
+            RuleFor(x => x.FirstName).Length(1, 10).WithMessage(localizer["FirstNameValidationLength"])
                                      .NotEmpty().WithMessage(localizer["FirstNameValidationRequired"]);
-            RuleFor(x => x.LastName).Length(1, 10).WithMessage(localizer["LastNameValidationLenght"])
+            RuleFor(x => x.LastName).Length(1, 10).WithMessage(localizer["LastNameValidationLength"])
                                     .NotEmpty().WithMessage(localizer["LastNameValidationRequired"]);
             RuleFor(x => x.DateOfBirth).Must(BeAtLeast18YearsOld).WithMessage("Must be 18 or older!")
                                        .NotEmpty().WithMessage(localizer["DateOfBirthValidationRequired"]);

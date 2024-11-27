@@ -144,7 +144,7 @@
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
   </data>
-  <data name="FirstNameValidationLenght" xml:space="preserve">
+  <data name="FirstNameValidationLength" xml:space="preserve">
     <value>First name must be between 1 and 10 characters.</value>
   </data>
   <data name="FirstNameValidationRequired" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
-  <data name="LastNameValidationLenght" xml:space="preserve">
+  <data name="LastNameValidationLength" xml:space="preserve">
     <value>Last name must be between 1 and 10 characters.</value>
   </data>
   <data name="LastNameValidationRequired" xml:space="preserve">

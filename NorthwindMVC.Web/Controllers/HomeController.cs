@@ -19,9 +19,6 @@ namespace NorthwindMVC.Web.Controllers
 
         public IActionResult Index()
         {
-            var currentLanguage = CultureInfo.CurrentCulture.Name;
-            ViewData["SelectedLanguage"] = currentLanguage == "en-US" ? "English" : "Bosanski";
-            ViewData["SelectedFlag"] = currentLanguage == "en-US" ? "us" : "ba";
             return View();
         }
 

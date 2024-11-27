@@ -144,7 +144,7 @@
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
   </data>
-  <data name="FirstNameValidationLenght" xml:space="preserve">
+  <data name="FirstNameValidationLength" xml:space="preserve">
     <value>Ime mora da bude između 1 i 10 karaktera.</value>
   </data>
   <data name="FirstNameValidationRequired" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="LastName" xml:space="preserve">
     <value>Prezime</value>
   </data>
-  <data name="LastNameValidationLenght" xml:space="preserve">
+  <data name="LastNameValidationLength" xml:space="preserve">
     <value>Prezime mora da bude između 1 i 10 karaktera.</value>
   </data>
   <data name="LastNameValidationRequired" xml:space="preserve">

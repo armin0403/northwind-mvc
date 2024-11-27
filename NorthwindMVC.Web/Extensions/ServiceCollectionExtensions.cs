@@ -18,6 +18,7 @@ namespace NorthwindMVC.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMapper, Mapper>();
+            services.AddScoped<LanguageService>();
 
             services.AddDbContext<NorthwindDbContext>((sp, opts) =>
             {
