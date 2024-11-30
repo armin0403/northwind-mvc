@@ -1,0 +1,71 @@
+﻿@model NorthwindMVC.Web.ViewModels.EmployeeViewModel
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">@Translate["EmployeeTable"]</h3>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <button asp-action="AddEmployee" asp-controller="Employee" class="btn btn-secondary btn-sm w-auto">@Translate["AddEmployee"]</button>
+                    </div>
+                    <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                        <label class="d-flex align-items-center mb-0">
+                            <span class="mr-2">@Translate["Search"]:</span>
+                            <input class="form-control form-control-sm w-auto" type="search" />
+                        </label>
+                    </div>
+                </div>
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>@Translate["FirstName"]</th>
+                    <th>@Translate["LastName"]</th>
+                    <th>@Translate["Dateofbirth"]</th>
+                    <th>@Translate["Title"]</th>
+                    <th>@Translate["HomePhone"]</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Gecko</td>
+                    <td>Camino 1.5</td>
+                    <td>OSX.3+</td>
+                    <td>1.8</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>Misc</td>
+                    <td>Links</td>
+                    <td>Text only</td>
+                    <td>-</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>Misc</td>
+                    <td>Lynx</td>
+                    <td>Text only</td>
+                    <td>-</td>
+                    <td>X</td>
+                  </tr>                
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>@Translate["FirstName"]</th>
+                    <th>@Translate["LastName"]</th>
+                    <th>@Translate["Dateofbirth"]</th>
+                    <th>@Translate["Title"]</th>
+                    <th>@Translate["HomePhone"]</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>

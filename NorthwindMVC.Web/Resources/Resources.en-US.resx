@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>Add employee</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="Bosnian" xml:space="preserve">
     <value>Bosnian</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
   </data>
   <data name="ConfirmPasswordValidation" xml:space="preserve">
     <value>Confirm passowrd must be same as your password.</value>
   </data>
   <data name="ConfirmPasswordValidationRequired" xml:space="preserve">
     <value>Confirm password field required.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
   </data>
   <data name="Dateofbirth" xml:space="preserve">
     <value>Date of birth</value>
@@ -138,8 +150,20 @@
   <data name="EmailValidationRequired" xml:space="preserve">
     <value>Email field required.</value>
   </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="EmployeeTable" xml:space="preserve">
+    <value>Table of employees</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Extension</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
@@ -150,8 +174,14 @@
   <data name="FirstNameValidationRequired" xml:space="preserve">
     <value>First name field required.</value>
   </data>
+  <data name="HireDate" xml:space="preserve">
+    <value>Date of hire</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="HomePhone" xml:space="preserve">
+    <value>Contact number</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
@@ -168,17 +198,41 @@
   <data name="LogOut" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="PasswordValidationRequired" xml:space="preserve">
     <value>Password field required and must be between 8 and 18 characters.</value>
   </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
   <data name="RegisterHere" xml:space="preserve">
     <value>Register here</value>
   </data>
+  <data name="ReportsTo" xml:space="preserve">
+    <value>Reports to</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="SignInHere" xml:space="preserve">
     <value>Sign in here.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TitleOfCourtesy" xml:space="preserve">
+    <value>Title of courtesy</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
