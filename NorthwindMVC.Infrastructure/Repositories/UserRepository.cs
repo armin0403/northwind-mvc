@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthwindMVC.Core;
-using NorthwindMVC.Infrastructure;
 
 namespace NorthwindMVC.Infrastructure.Repositories
 {

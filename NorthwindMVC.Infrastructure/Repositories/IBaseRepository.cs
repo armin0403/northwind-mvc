@@ -6,7 +6,8 @@ namespace NorthwindMVC.Infrastructure.Repositories
     public interface IBaseRepository<TEntity> where TEntity : class
     {
         Task<TEntity> Get (int id);
-        IEnumerable<TEntity> GetAll ();
+        Task<TEntity> GetByIdAsync (int id);
+        IQueryable<TEntity> GetAll ();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicte);
 
         Task AddAsync (TEntity entity);

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using NorthwindMVC.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 builder.Services.RegisterServices();

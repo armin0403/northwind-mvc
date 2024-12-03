@@ -126,6 +126,9 @@
   <data name="Bosnian" xml:space="preserve">
     <value>Bosanski</value>
   </data>
+  <data name="ChoseFile" xml:space="preserve">
+    <value>Izaberite fajl</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>Grad</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Extension" xml:space="preserve">
     <value>Ekstencija</value>
+  </data>
+  <data name="FiledRequired" xml:space="preserve">
+    <value>Polje potrebno</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
@@ -233,6 +239,9 @@
   </data>
   <data name="TitleOfCourtesy" xml:space="preserve">
     <value>Titula ljubaznosti</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>

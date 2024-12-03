@@ -16,9 +16,10 @@
         public string Country { get; set; }
         public string HomePhone { get; set; }
         public string Extension { get; set; }
-        public byte[] Photo { get; set; }
+        public byte[]? Photo { get; set; } = null;
         public string Notes { get; set; }
-        public int ReportsTo { get; set; }
+        public int? ReportsToId { get; set; }
+        public Employee? ReportsTo { get; set; }
         public string PhotoPath { get; set; }
     }
 }

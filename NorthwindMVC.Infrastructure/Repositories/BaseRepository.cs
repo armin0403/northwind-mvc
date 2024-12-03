@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using NorthwindMVC.Infrastucture;
 
 namespace NorthwindMVC.Infrastructure.Repositories
@@ -32,11 +33,16 @@ namespace NorthwindMVC.Infrastructure.Repositories
            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbContext.Set<TEntity>();
         }
 
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+                
         public async Task UpdateAsync(TEntity entity)
         {
            _dbContext.Set<TEntity>().Update(entity);

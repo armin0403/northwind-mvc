@@ -126,6 +126,9 @@
   <data name="Bosnian" xml:space="preserve">
     <value>Bosnian</value>
   </data>
+  <data name="ChoseFile" xml:space="preserve">
+    <value>Chose a file</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>City</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Extension" xml:space="preserve">
     <value>Extension</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Filed required</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
@@ -233,6 +239,9 @@
   </data>
   <data name="TitleOfCourtesy" xml:space="preserve">
     <value>Title of courtesy</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
