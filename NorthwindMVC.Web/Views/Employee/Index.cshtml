@@ -1,25 +1,31 @@
 ﻿@model PagedList<NorthwindMVC.Core.Models.Employee>
 <section class="content">
-      <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid">
+       <div class="row">
           <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">@Translate["EmployeeTable"]</h3>
-              </div>
-              <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-sm-6 d-flex align-items-center">
-                        <a asp-controller="Employee" asp-action="AddEmployee" class="btn btn-secondary btn-sm w-auto">@Translate["AddEmployee"]</a>
+             <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@Translate["EmployeeTable"]</h3>
                     </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <a asp-controller="Employee" asp-action="AddEmployee" class="btn btn-secondary btn-sm">@Translate["AddEmployee"]</a>
+                        </div>
                     <div class="col-sm-6 d-flex justify-content-end align-items-center">
-                        <label class="d-flex align-items-center mb-0">
-                            <span class="mr-2">@Translate["Search"]:</span>
-                            <input class="form-control form-control-sm w-auto" type="search" />
-                        </label>
+                        <form asp-action="Search" asp-controller="Employee" method="get" style="display: flex; margin: 0; padding: 0;">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["Search"]" />
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <table id="example2" class="table table-bordered table-hover">
+                  </div>
+                  <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>@Translate["FirstName"]</th>
@@ -50,11 +56,11 @@
                     <th>@Translate["HomePhone"]</th>
                   </tr>
                   </tfoot>
-                </table>
-              </div>
-              @Html.DisplayFor(e => e.Pager)
-            </div>
+                  </table>
+                </div>
+                @Html.DisplayFor(e => e.Pager)
+             </div>
           </div>
-        </div>
+       </div>
       </div>
 </section>

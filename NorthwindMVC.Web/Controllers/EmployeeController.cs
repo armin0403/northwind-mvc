@@ -20,9 +20,9 @@ namespace NorthwindMVC.Web.Controllers
             _employeeService = employeeService;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5, string searchTerm = "")
         {
-            var employees = await _employeeService.GetPagedEmployee(pageNumber, pageSize);
+            var employees = await _employeeService.GetPagedEmployee(pageNumber, pageSize, searchTerm);
             return View("Index", employees);
         }
 
@@ -49,6 +49,11 @@ namespace NorthwindMVC.Web.Controllers
         public IActionResult DeleteEmployee()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")
+        {
+            return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm});
         }
     }
 }

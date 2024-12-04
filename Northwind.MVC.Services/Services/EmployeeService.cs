@@ -27,12 +27,19 @@ namespace NorthwindMVC.Services.Services
             return true;
         }
 
-        public async Task<PagedList<Employee>> GetPagedEmployee(int pageNumber, int pageSize)
+        public async Task<PagedList<Employee>> GetPagedEmployee(int pageNumber, int pageSize, string searchTerm)
         {
             var employees = UnitOfWork.EmployeeRepository.GetAll();
+
+            if(!string.IsNullOrEmpty(searchTerm))
+            {
+                employees = employees.Where(e => e.FirstName.ToLower().Contains(searchTerm.ToLower()));
+            }
+
             var pagedEmployees = _paginationService.CreatePagedList(employees, pageNumber, pageSize);
 
             return pagedEmployees;  
         }
+
     }
 }
