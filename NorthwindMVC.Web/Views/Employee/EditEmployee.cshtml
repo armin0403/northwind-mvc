@@ -1,0 +1,122 @@
+﻿@model NorthwindMVC.Web.ViewModels.EmployeeViewModel
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@Translate["AddEmployee"]</h3>
+                    </div>
+                    <form asp-action="EditEmployee" asp-controller="Employee" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row">
+                            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@Translate["FirstName"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["FirstName"]" asp-for="FirstName" value="@Model.FirstName" />
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["LastName"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["LastName"]" asp-for="LastName" value="@Model.LastName" />
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Title"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Title"]" asp-for="Title" value="@Model.Title" />
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["TitleOfCourtesy"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["TitleOfCourtesy"]" asp-for="TitleOfCourtesy" value="@Model.TitleOfCourtesy" />
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Dateofbirth"]</label>
+                                    <div class="input-group date" id="dateofbirthdatetimepicker" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#dateofbirthdatetimepicker" asp-for="DateOfBirth" value="@Model.DateOfBirth"/>
+                                        <div class="input-group-append" data-target="#dateofbirthdatetimepicker" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["HireDate"]</label>
+                                    <div class="input-group date" id="hiredatetimepicker" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#hiredatetimepicker" asp-for="HireDate" value="@Model.HireDate"/>
+                                        <div class="input-group-append" data-target="#hiredatetimepicker" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["ReportsTo"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["ReportsTo"]" asp-for="ReportsTo" value="@Model.ReportsTo" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@Translate["Address"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Address"]" asp-for="Address" value="@Model.Address"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["City"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["City"]" asp-for="City" value="@Model.City"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Region"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Region"]" asp-for="Region" value="@Model.Region"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["PostalCode"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["PostalCode"]" asp-for="PostalCode" value="@Model.PostalCode"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Country"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Country"]" asp-for="Country" value="@Model.Country"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["HomePhone"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone" value="@Model.HomePhone"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Extension"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension" value="@Model.Extension" />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">@Translate["Photo"]</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload" value="@Model.PhotoUpload">
+                                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChoseFile"]</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">@Translate["Upload"]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Notes"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Notes"]" asp-for="Notes" value="@Model.Notes" />
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-secondary">@Translate["SaveChanges"]</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <script>
+    $(document).ready(function () {
+        $('#dateofbirthdatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+        $('#hiredatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+        $(function () {
+            bsCustomFileInput.init();
+        });
+    });
+    </script>

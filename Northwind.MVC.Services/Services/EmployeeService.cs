@@ -41,5 +41,18 @@ namespace NorthwindMVC.Services.Services
             return pagedEmployees;  
         }
 
+        public async Task<bool> Delete(Employee employee)
+        {
+            await UnitOfWork.EmployeeRepository.DeleteAsync(employee);
+            await UnitOfWork.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> Update(Employee employee)
+        {
+            await UnitOfWork.EmployeeRepository.UpdateAsync(employee);
+            await UnitOfWork.SaveChangesAsync();
+            return true;
+        }
     }
 }

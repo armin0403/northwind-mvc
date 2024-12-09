@@ -8,5 +8,7 @@ namespace NorthwindMVC.Services.Services
         Task<PagedList<Employee>> GetPagedEmployee (int pageNumber, int pageSize, string searchTerm);
         Task<Employee> GetById(int id);
         Task<bool> Add(Employee employee);
+        Task<bool> Delete(Employee employee);
+        Task<bool> Update(Employee employee);
     }
 }

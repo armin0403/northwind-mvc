@@ -18,9 +18,10 @@ namespace NorthwindMVC.Infrastructure.Repositories
            await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public void Delete(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicte)

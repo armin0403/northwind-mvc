@@ -228,6 +228,9 @@
   <data name="ReportsTo" xml:space="preserve">
     <value>Odgovara</value>
   </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Spasi promjene</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Pretraga</value>
   </data>

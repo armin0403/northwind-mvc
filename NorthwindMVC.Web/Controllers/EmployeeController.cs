@@ -42,13 +42,36 @@ namespace NorthwindMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditEmployee()
+        public async Task<IActionResult> EditEmployee(int id)
         {
-            return View();
+            var employee = await _employeeService.GetById(id);
+            var employeeVM = _mapper.Map<EmployeeViewModel>(employee);
+            return View(employeeVM);
         }
-        public IActionResult DeleteEmployee()
+
+        [HttpPost]
+        public async Task<IActionResult> EditEmployee(int id, EmployeeViewModel employeeVM)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit employee");
+                return View(employeeVM);
+            }
+            var editEmployee = await _employeeService.GetById(id);
+            _mapper.Map(employeeVM, editEmployee);
+            
+            await _employeeService.Update(editEmployee);
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var employee = await _employeeService.GetById(id);
+            if (employee == null) return View("Error");
+
+            await _employeeService.Delete(employee);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")

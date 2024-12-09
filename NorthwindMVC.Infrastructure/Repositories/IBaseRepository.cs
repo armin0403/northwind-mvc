@@ -12,7 +12,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
 
         Task AddAsync (TEntity entity);
         Task UpdateAsync (TEntity entity);
-        void Delete (TEntity entity);
+        Task DeleteAsync (TEntity entity);
 
     }
 }

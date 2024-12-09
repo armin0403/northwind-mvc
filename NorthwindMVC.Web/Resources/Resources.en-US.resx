@@ -228,6 +228,9 @@
   <data name="ReportsTo" xml:space="preserve">
     <value>Reports to</value>
   </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
