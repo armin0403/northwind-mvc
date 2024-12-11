@@ -18,13 +18,21 @@
     </div>
 </div>
 <script>
-    document.getElementById('confirmDeleteButton').onclick = function () {
-        const rowId = document.querySelector('.context-menu-row').getAttribute('data-id');
-        const controllerName = document.querySelector('.context-menu-row').getAttribute('data-controller');
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteModal = $('#modal-sm');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
 
-        const deleteUrl = `/${controllerName}/DeleteEmployee?id=${rowId}`;
-        window.location.href = deleteUrl;
+        confirmDeleteButton.onclick = function () {
+            const rowId = deleteModal.attr('data-row-id');
+            const controllerName = deleteModal.attr('data-controller-name');
 
-        deleteModal.modal('hide');
-    };
+            // Redirect to delete action
+            const deleteUrl = `/${controllerName}/Delete?id=${rowId}`;
+            console.log(`Redirecting to: ${deleteUrl}`);
+            window.location.href = deleteUrl;
+
+            // Hide the modal
+            deleteModal.modal('hide');
+        };
+    });
 </script>

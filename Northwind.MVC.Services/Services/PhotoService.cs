@@ -37,4 +37,30 @@ public class PhotoService : IPhotoService
             throw new InvalidOperationException($"The entity of type {typeof(TEntity).Name} does not contain a 'PhotoPath' property.");
         }
     }
+
+    public async Task DeletePhotoAsync (string photoPath)
+    {
+        if (string.IsNullOrWhiteSpace(photoPath))
+            throw new Exception("Photo path null or white space");
+
+        string rootPath = Directory.GetCurrentDirectory();
+        string fullFilePath = Path.Combine(rootPath, "wwwroot", photoPath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+        if (File.Exists(fullFilePath))
+        {
+            try
+            {
+                File.Delete(fullFilePath);
+                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to delete!", ex);
+            }
+        }
+        else
+        {
+            throw new Exception("File doesn't exist!");
+        }        
+    }
 }

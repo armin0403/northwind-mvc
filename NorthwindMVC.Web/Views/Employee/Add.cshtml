@@ -48,7 +48,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["ReportsTo"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["ReportsTo"]" asp-for="ReportsTo" />
+                                    <select class="select2" style="width: 100%;" id="reportsToId" asp-for="ReportsToId" asp-items="Model.EmployeeDropdown">
+                                        <option value="" selected>None</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -110,12 +112,44 @@
         </div>
     </div>
 </section>
-    <script>
+<script>
     $(document).ready(function () {
         $('#dateofbirthdatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
         $('#hiredatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
-        $(function () {
-            bsCustomFileInput.init();
+
+        bsCustomFileInput.init();
+
+        console.log(@Html.Raw(Json.Serialize(Model.EmployeeDropdown)));
+        var employeeData = @Html.Raw(Json.Serialize(Model.EmployeeDropdown))
+                .map(function (item) {
+            return { id: item.value, text: item.text };
         });
+
+        console.log(employeeData);
+
+        $('#reportsToId').select2({
+            placeholder: "Name of manager",
+            data: employeeData, 
+            minimumInputLength: 0,
+            ajax: {
+                url: '/Employee/GetEmployeeDropdown',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var results = data.results.slice(0, 5);
+                    return {
+                        results: results
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $("#reportsToId").val("").trigger("change");
     });
-    </script>
+</script>

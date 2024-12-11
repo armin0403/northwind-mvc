@@ -30,6 +30,7 @@ namespace NorthwindMVC.Web
 
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IPaginationService, PaginationService>();
+            services.AddScoped<IDropdownService, DropdownService>();
 
             services.AddDbContext<NorthwindDbContext>((sp, opts) =>
             {

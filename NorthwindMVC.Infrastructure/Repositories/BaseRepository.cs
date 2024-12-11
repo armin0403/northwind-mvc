@@ -39,6 +39,11 @@ namespace NorthwindMVC.Infrastructure.Repositories
             return _dbContext.Set<TEntity>();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllList()
+        {
+            return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
         public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);

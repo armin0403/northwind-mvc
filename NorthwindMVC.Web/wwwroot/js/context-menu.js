@@ -33,12 +33,14 @@
 
             document.getElementById('editOption').onclick = function () {
                 console.log("Edit option clicked");
-                const editUrl = `/${controllerName}/EditEmployee?id=${rowId}`;
+                const editUrl = `/${controllerName}/Edit?id=${rowId}`;
                 window.location.href = editUrl;
             };
 
             document.getElementById('deleteOption').onclick = function () {
                 console.log("Delete option clicked");
+                deleteModal.attr('data-row-id', rowId);
+                deleteModal.attr('data-controller-name', controllerName);
                 deleteModal.modal('show');
             };
 

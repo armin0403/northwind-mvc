@@ -2,10 +2,12 @@
 @using NorthwindMVC.Core
 @using NorthwindMVC.Core.Pagination;
 @using NorthwindMVC.Web.Resources
+@using NorthwindMVC.Web.Helpers
 @using Microsoft.AspNetCore.Localization;
 @using Microsoft.Extensions.Localization;
 
 
 @inject IStringLocalizer<Resources> Translate;
+@inject IDropdownService DropdownService;
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

@@ -1,4 +1,6 @@
-﻿namespace NorthwindMVC.Web.ViewModels;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace NorthwindMVC.Web.ViewModels;
 
     public class EmployeeViewModel
     {
@@ -20,5 +22,6 @@
         public string Notes { get; set; }
         public int? ReportsToId { get; set; }
         public EmployeeViewModel? ReportsTo { get; set; }
+        public IEnumerable<SelectListItem> EmployeeDropdown { get; set; }
     }
 
