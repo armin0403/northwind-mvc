@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
-using NorthwindMVC.Infrastucture;
 
 namespace NorthwindMVC.Infrastructure.Repositories
 {
@@ -16,6 +14,11 @@ namespace NorthwindMVC.Infrastructure.Repositories
         public async Task AddAsync(TEntity entity)
         {
            await _dbContext.Set<TEntity>().AddAsync(entity);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+           return await _dbContext.Set<TEntity>().AnyAsync(predicate);
         }
 
         public async Task DeleteAsync(TEntity entity)

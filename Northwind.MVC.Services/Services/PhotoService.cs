@@ -3,9 +3,9 @@
 namespace NorthwindMVC.Services.Services;
 
 public class PhotoService : IPhotoService
-{  
+{
 
-    public async Task AddPhotoAsync<TEntity>(IFormFile photo, TEntity entity, string folderPath) where TEntity : class
+    public async Task<string> AddPhotoAsync<TEntity>(IFormFile photo, TEntity entity, string folderPath) where TEntity : class
     {
         if (photo == null || photo.Length == 0)
             throw new ArgumentException("Invalid photo file");
@@ -26,41 +26,46 @@ public class PhotoService : IPhotoService
             await photo.CopyToAsync(fileStream);
         }
 
+        string relativePath = $"/{folderPath.Replace("\\", "/")}/{uniqueFileName}";
+
         var photoPathProperty = entity.GetType().GetProperty("PhotoPath");
         if (photoPathProperty != null)
         {
-            string relativePath = Path.Combine(folderPath, uniqueFileName).Replace("\\", "/");
-            photoPathProperty.SetValue(entity, "/" + relativePath);
+            photoPathProperty.SetValue(entity, relativePath);
         }
         else
         {
             throw new InvalidOperationException($"The entity of type {typeof(TEntity).Name} does not contain a 'PhotoPath' property.");
         }
+
+        return relativePath;
     }
 
-    public async Task DeletePhotoAsync (string photoPath)
+    public async Task<bool> CheckPhotoAsync(string photoPath)
     {
-        if (string.IsNullOrWhiteSpace(photoPath))
-            throw new Exception("Photo path null or white space");
+        if (string.IsNullOrEmpty(photoPath))
+        {
+            return false;
+        }
 
         string rootPath = Directory.GetCurrentDirectory();
-        string fullFilePath = Path.Combine(rootPath, "wwwroot", photoPath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+        string fullPath = Path.Combine(rootPath, "wwwroot", photoPath.TrimStart('/'));
+        return File.Exists(fullPath);
 
-        if (File.Exists(fullFilePath))
-        {
-            try
-            {
-                File.Delete(fullFilePath);
-                await Task.CompletedTask;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to delete!", ex);
-            }
-        }
-        else
-        {
-            throw new Exception("File doesn't exist!");
-        }        
     }
+
+    public async Task DeletePhotoAsync(string photoPath)
+    {
+        if (string.IsNullOrEmpty(photoPath))
+            return;
+
+        string rootPath = Directory.GetCurrentDirectory();
+        string fullPath = Path.Combine(rootPath, "wwwroot", photoPath.TrimStart('/'));
+
+        if (File.Exists(fullPath))
+        {
+            await Task.Run(() => File.Delete(fullPath));
+        }
+    }
+
 }

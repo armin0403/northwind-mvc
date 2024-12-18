@@ -1,11 +1,12 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using NorthwindMVC.Web;
+using NorthwindMVC.Web.CustomExceptionMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.RegisterServices();
 builder.Services.AddLocalization();
 builder.Services.AddControllersWithViews()
@@ -45,6 +46,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+//app.UseMiddleware<ErrorHandleMiddleware>();
 
 app.UseRouting();
 

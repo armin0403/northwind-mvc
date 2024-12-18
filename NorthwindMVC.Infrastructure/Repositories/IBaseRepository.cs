@@ -14,6 +14,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
         Task AddAsync (TEntity entity);
         Task UpdateAsync (TEntity entity);
         Task DeleteAsync (TEntity entity);
+        Task <bool> AnyAsync (Expression<Func<TEntity, bool>> predicate);
 
     }
 }

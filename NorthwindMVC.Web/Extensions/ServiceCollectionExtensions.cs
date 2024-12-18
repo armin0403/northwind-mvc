@@ -6,6 +6,8 @@ using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Services;
 using NorthwindMVC.Services.Services;
 using NorthwindMVC.Web.Helpers;
+using NorthwindMVC.Web.Helpers.ToastNotifications;
+using NorthwindMVC.Web.Validator;
 using NorthwindMVC.Web.ViewModels;
 
 namespace NorthwindMVC.Web
@@ -16,6 +18,7 @@ namespace NorthwindMVC.Web
         {
             services.AddControllersWithViews();
             services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+            services.AddScoped<IValidator<EmployeeViewModel>, EmployeeViewModelValidator>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
@@ -25,7 +28,7 @@ namespace NorthwindMVC.Web
             services.RegisterMapsterConfiguration();
 
             services.AddScoped<IMapper, MapsterMapper.Mapper>();
-
+            services.AddScoped<IToastr, Toastr>();
             services.AddScoped<LanguageService>();
 
             services.AddScoped<IPhotoService, PhotoService>();

@@ -54,5 +54,18 @@ namespace NorthwindMVC.Services.Services
             await UnitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> DeleteEmployeeAsync(Employee employee)
+        {
+            var hasSub = await UnitOfWork.EmployeeRepository.AnyAsync(e => e.ReportsToId == employee.Id);
+
+            if(hasSub)
+            {
+                return false;
+            }
+
+            await UnitOfWork.EmployeeRepository.DeleteAsync(employee);
+            return true;
+        }
     }
 }

@@ -11,28 +11,28 @@
                     <form asp-action="Edit" asp-controller="Employee" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                            <input type="hidden" asp-for="Id"/>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@Translate["FirstName"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["FirstName"]" asp-for="FirstName" value="@Model.FirstName" />
+                                    <input class="form-control" type="text" placeholder="@Translate["FirstName"]" asp-for="FirstName"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["LastName"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["LastName"]" asp-for="LastName" value="@Model.LastName" />
+                                    <input class="form-control" type="text" placeholder="@Translate["LastName"]" asp-for="LastName"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Title"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Title"]" asp-for="Title" value="@Model.Title" />
+                                    <input class="form-control" type="text" placeholder="@Translate["Title"]" asp-for="Title"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["TitleOfCourtesy"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["TitleOfCourtesy"]" asp-for="TitleOfCourtesy" value="@Model.TitleOfCourtesy" />
+                                    <input class="form-control" type="text" placeholder="@Translate["TitleOfCourtesy"]" asp-for="TitleOfCourtesy"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Dateofbirth"]</label>
                                     <div class="input-group date" id="dateofbirthdatetimepicker" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#dateofbirthdatetimepicker" asp-for="DateOfBirth" value="@Model.DateOfBirth"/>
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#dateofbirthdatetimepicker" asp-for="DateOfBirth"/>
                                         <div class="input-group-append" data-target="#dateofbirthdatetimepicker" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label>@Translate["HireDate"]</label>
                                     <div class="input-group date" id="hiredatetimepicker" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#hiredatetimepicker" asp-for="HireDate" value="@Model.HireDate"/>
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#hiredatetimepicker" asp-for="HireDate"/>
                                         <div class="input-group-append" data-target="#hiredatetimepicker" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -49,37 +49,39 @@
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["ReportsTo"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["ReportsTo"]" asp-for="ReportsTo" value="@Model.ReportsTo" />
+                                    <select class="select2" style="width: 100%;" id="reportsToId" asp-for="ReportsToId" asp-items="Model.EmployeeDropdown">
+                                        <option value="" selected>None</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@Translate["Address"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Address"]" asp-for="Address" value="@Model.Address"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["Address"]" asp-for="Address"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["City"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["City"]" asp-for="City" value="@Model.City"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["City"]" asp-for="City"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Region"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Region"]" asp-for="Region" value="@Model.Region"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["Region"]" asp-for="Region"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["PostalCode"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["PostalCode"]" asp-for="PostalCode" value="@Model.PostalCode"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["PostalCode"]" asp-for="PostalCode"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Country"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Country"]" asp-for="Country" value="@Model.Country"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["Country"]" asp-for="Country"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["HomePhone"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone" value="@Model.HomePhone"/>
+                                    <input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone"/>
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Extension"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension" value="@Model.Extension" />
+                                    <input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -87,7 +89,7 @@
                                     <label for="exampleInputFile">@Translate["Photo"]</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload" value="@Model.PhotoUpload">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload">
                                             <label class="custom-file-label" for="exampleInputFile">@Translate["ChoseFile"]</label>
                                         </div>
                                         <div class="input-group-append">
@@ -97,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>@Translate["Notes"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Notes"]" asp-for="Notes" value="@Model.Notes" />
+                                    <input class="form-control" type="text" placeholder="@Translate["Notes"]" asp-for="Notes"/>
                                 </div>
                             </div>
                         </div>    
@@ -111,12 +113,47 @@
         </div>
     </div>
 </section>
-    <script>
+<script>
     $(document).ready(function () {
         $('#dateofbirthdatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
         $('#hiredatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
-        $(function () {
-            bsCustomFileInput.init();
+
+        bsCustomFileInput.init();
+
+        console.log(@Html.Raw(Json.Serialize(Model.EmployeeDropdown)));
+        var employeeData = @Html.Raw(Json.Serialize(Model.EmployeeDropdown))
+                    .map(function (item) {
+            return { id: item.value, text: item.text };
         });
+
+        console.log(employeeData);
+
+        $('#reportsToId').select2({
+            placeholder: "Name of manager",
+            data: employeeData,
+            minimumInputLength: 0,
+            ajax: {
+                url: '/Employee/GetEmployeeDropdown',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var results = data.results.slice(0, 5);
+                    return {
+                        results: results
+                    };
+                },
+                cache: true
+            }
+        });
+        var preselectedValue = '@Model.ReportsToId';
+
+        if (preselectedValue) {
+            $('#reportsToId').val(preselectedValue).trigger('change');
+        }
     });
-    </script>
+</script>

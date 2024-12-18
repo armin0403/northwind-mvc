@@ -1,4 +1,3 @@
-using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using NorthwindMVC.Services;
 
@@ -25,6 +24,6 @@ namespace NorthwindMVC.Web.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
+        }                
     }
 }

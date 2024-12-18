@@ -1,7 +1,9 @@
 ﻿@using System;
 @using NorthwindMVC.Services;
+@using NorthwindMVC.Web.Helpers.ToastNotifications;
 
 @inject LanguageService LanguageService;
+@inject IToastr Toastr;
 
 <head>
     <meta charset="utf-8" />
@@ -33,6 +35,8 @@
     <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
     <!-- Flags -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="~/css/context-menu.css" />
 
@@ -172,5 +176,22 @@
     <script src="~/dist/js/adminlte.js"></script>
     <!-- Custom Scripts -->
     <script src="~/js/context-menu.js"></script>
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script>
+        function showToastMessages(timeout = 0) {
+            return new Promise(function (resolve) {
+                setTimeout(async function () {
+                    await $.get("@Url.Action("GetMessages", "Toast")",
+                        function (jsResult) {
+                            eval(jsResult);
+                            resolve("Ok");
+                        });
+                },
+                    timeout);
+            });
+        };
+    </script>
+    @Toastr.Display()
     @await RenderSectionAsync("Scripts", required: false)
 </body>
