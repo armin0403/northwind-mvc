@@ -112,7 +112,7 @@ namespace NorthwindMVC.Web.Controllers
                 PasswordSalt = passwordSalt,
             };
 
-            _userService.Add(entity);
+            await _userService.Add(entity);
 
             return RedirectToAction("Index", "Home");
         }
