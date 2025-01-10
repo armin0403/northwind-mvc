@@ -21,5 +21,7 @@
         public int? ReportsToId { get; set; }
         public Employee? ReportsTo { get; set; }
         public string PhotoPath { get; set; }
+
+        public ICollection<EmployeeTerritory> EmployeeTerritories { get; set;}
     }
 }

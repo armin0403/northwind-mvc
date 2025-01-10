@@ -73,8 +73,39 @@
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>@Translate["HomePhone"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone"/>
+                                    <div>
+                                        <span asp-validation-for="HomePhone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@Translate["Extension"]</label>
+                                    <input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension" />
+                                    <div>
+                                        <span asp-validation-for="Extension" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
+                                <div class="d-flex justify-content-center align-items-center">
+                                        <img id="currentPhotoPreview" src="@Url.Content("~/uploads/no-photo.png")" alt="Profile Photo" class="img-thumbnail" style="width: 258; height: 258;" />
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <label>Profile photo</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload">
+                                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChoseFile"]</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">@Translate["Upload"]</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label>@Translate["Address"]</label>
                                     <input class="form-control" type="text" placeholder="@Translate["Address"]" asp-for="Address"/>
@@ -110,37 +141,8 @@
                                         <span asp-validation-for="Country" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>@Translate["HomePhone"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone"/>
-                                    <div>
-                                        <span asp-validation-for="HomePhone" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>@Translate["Extension"]</label>
-                                    <input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension" />
-                                    <div>
-                                        <span asp-validation-for="Extension" class="text-danger"></span>
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">@Translate["Photo"]</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload">
-                                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChoseFile"]</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">@Translate["Upload"]</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span asp-validation-for="PhotoUpload" class="text-danger"></span>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label>@Translate["Notes"]</label>
                                     <input class="form-control" type="text" placeholder="@Translate["Notes"]" asp-for="Notes" />
@@ -166,6 +168,18 @@
         $('#hiredatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
 
         bsCustomFileInput.init();
+
+        document.getElementById("exampleInputFile").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("currentPhotoPreview").src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
 
         console.log(@Html.Raw(Json.Serialize(Model.EmployeeDropdown)));
         var employeeData = @Html.Raw(Json.Serialize(Model.EmployeeDropdown))

@@ -1,5 +1,7 @@
-﻿using NorthwindMVC.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthwindMVC.Core.Models;
 using NorthwindMVC.Core.Pagination;
+using NorthwindMVC.Infrastructure;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 
 namespace NorthwindMVC.Services.Services
@@ -8,12 +10,18 @@ namespace NorthwindMVC.Services.Services
     {
         private readonly IUnitOfWork UnitOfWork;
         private readonly IPaginationService _paginationService;
+        private readonly NorthwindDbContext _dbContext;
+        private readonly IPhotoService _photoService;
 
         public EmployeeService(IUnitOfWork unitOfWork,
-                               IPaginationService paginationService) 
+                               IPaginationService paginationService,
+                               NorthwindDbContext dbContext,
+                               IPhotoService photoService) 
         {
             this.UnitOfWork = unitOfWork;
             _paginationService = paginationService;
+            _dbContext = dbContext;
+            _photoService = photoService;
         }
         public async Task<Employee> GetById(int id)
         {
@@ -29,14 +37,15 @@ namespace NorthwindMVC.Services.Services
 
         public async Task<PagedList<Employee>> GetPagedEmployee(int pageNumber, int pageSize, string searchTerm)
         {
-            var employees = UnitOfWork.EmployeeRepository.GetAll();
+            string? normalizedSearchTerm = searchTerm?.ToLower();
 
-            if(!string.IsNullOrEmpty(searchTerm))
-            {
-                employees = employees.Where(e => e.FirstName.ToLower().Contains(searchTerm.ToLower()));
-            }
+            var query = UnitOfWork.EmployeeRepository.Find(e =>
+                string.IsNullOrEmpty(normalizedSearchTerm) ||
+                e.FirstName.ToLower().Contains(normalizedSearchTerm) ||
+                e.LastName.ToLower().Contains(normalizedSearchTerm));
 
-            var pagedEmployees = _paginationService.CreatePagedList(employees, pageNumber, pageSize);
+
+            var pagedEmployees = _paginationService.CreatePagedList<Employee>(query, pageNumber, pageSize);
 
             return pagedEmployees;  
         }
@@ -57,15 +66,29 @@ namespace NorthwindMVC.Services.Services
 
         public async Task<bool> DeleteEmployeeAsync(Employee employee)
         {
-            var hasSub = await UnitOfWork.EmployeeRepository.AnyAsync(e => e.ReportsToId == employee.Id);
-
-            if(hasSub)
+            using (var transaction = await _dbContext.Database.BeginTransactionAsync())
             {
-                return false;
-            }
+                try
+                {
+                    var hasSub = await UnitOfWork.EmployeeRepository.AnyAsync(e => e.ReportsToId == employee.Id);
+                    if (hasSub)
+                    {
+                        return false;
+                    }
 
-            await UnitOfWork.EmployeeRepository.DeleteAsync(employee);
-            return true;
+                    await UnitOfWork.EmployeeRepository.DeleteAsync(employee);
+                    await _photoService.DeletePhotoAsync(employee.PhotoPath);
+
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+            }           
+
         }
     }
 }

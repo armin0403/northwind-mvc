@@ -8,8 +8,8 @@ namespace NorthwindMVC.Infrastructure.Repositories
         Task<TEntity> Get (int id);
         Task<TEntity> GetByIdAsync (int id);
         Task<IEnumerable<TEntity>> GetAllList();
-        IQueryable<TEntity> GetAll ();
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicte);
+        IQueryable<TEntity> GetAllQueryable ();
+        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicte);
 
         Task AddAsync (TEntity entity);
         Task UpdateAsync (TEntity entity);

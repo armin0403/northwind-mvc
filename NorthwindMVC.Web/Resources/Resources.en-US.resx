@@ -132,6 +132,9 @@
   <data name="Bosnian" xml:space="preserve">
     <value>Bosnian</value>
   </data>
+  <data name="CantDelete" xml:space="preserve">
+    <value>Can't delete.</value>
+  </data>
   <data name="ChoseFile" xml:space="preserve">
     <value>Chose a file</value>
   </data>
@@ -153,6 +156,9 @@
   <data name="DateOfBirthValidationRequired" xml:space="preserve">
     <value>Date of birth field required.</value>
   </data>
+  <data name="EditSuccessful" xml:space="preserve">
+    <value>Changes successfully saved.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -162,11 +168,17 @@
   <data name="Employee" xml:space="preserve">
     <value>Employee</value>
   </data>
+  <data name="EmployeeDeleteSuc" xml:space="preserve">
+    <value>Employee successfully deleted.</value>
+  </data>
   <data name="Employees" xml:space="preserve">
     <value>Employees</value>
   </data>
   <data name="EmployeeTable" xml:space="preserve">
     <value>Table of employees</value>
+  </data>
+  <data name="EmployeeUnsuc" xml:space="preserve">
+    <value>Employee could not be deleted.</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
@@ -251,6 +263,9 @@
   </data>
   <data name="TitleOfCourtesy" xml:space="preserve">
     <value>Title of courtesy</value>
+  </data>
+  <data name="TotalItemNumber" xml:space="preserve">
+    <value>Total number of items</value>
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>

@@ -3,7 +3,7 @@
 @if(Model.TotalPages > 1)
 {
     <div class="card-footer">
-        <i>Showing @Model.PageSize of @Model.TotalItems files</i>
+        <i>@Translate["TotalItemNumber"] @Model.TotalItems</i>
         <ul class="pagination pagination-sm float-right">
             <li class="page-item @(Model.CurrentPage > 1 ? "" : "disabled")">
                 <a href="#" class="page-link" data-page="@(Model.CurrentPage - 1)">&laquo;</a>

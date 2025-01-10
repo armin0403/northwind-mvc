@@ -132,6 +132,9 @@
   <data name="Bosnian" xml:space="preserve">
     <value>Bosanski</value>
   </data>
+  <data name="CantDelete" xml:space="preserve">
+    <value>Zaposlenika nije moguće izbrisati.</value>
+  </data>
   <data name="ChoseFile" xml:space="preserve">
     <value>Izaberite fajl</value>
   </data>
@@ -153,6 +156,9 @@
   <data name="DateOfBirthValidationRequired" xml:space="preserve">
     <value>Datum rođenja neophodan.</value>
   </data>
+  <data name="EditSuccessful" xml:space="preserve">
+    <value>Uspjšeno spašene promjene.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -162,11 +168,17 @@
   <data name="Employee" xml:space="preserve">
     <value>Zaposlenik</value>
   </data>
+  <data name="EmployeeDeleteSuc" xml:space="preserve">
+    <value>Zaposlenik uspješno izbrisan.</value>
+  </data>
   <data name="Employees" xml:space="preserve">
     <value>Zaposlenici</value>
   </data>
   <data name="EmployeeTable" xml:space="preserve">
     <value>Tabela zaposlenih</value>
+  </data>
+  <data name="EmployeeUnsuc" xml:space="preserve">
+    <value>Zaposlenik nije izbrisan.</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Engleski</value>
@@ -251,6 +263,9 @@
   </data>
   <data name="TitleOfCourtesy" xml:space="preserve">
     <value>Titula ljubaznosti</value>
+  </data>
+  <data name="TotalItemNumber" xml:space="preserve">
+    <value>Ukupan broj stavki</value>
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>

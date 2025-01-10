@@ -26,7 +26,7 @@ namespace NorthwindMVC.Web.Validator
             RuleFor(x => x.HireDate).NotEmpty().WithMessage(localizer["FieldRequired"])
                                     .Must((model, hireDate)=> hireDate > model.DateOfBirth).WithMessage(localizer["MustBe18"]);
             RuleFor(x => x.DateOfBirth).NotEmpty().WithMessage(localizer["FieldRequired"])
-                                       .Must(BeAtLeast18YearsOld).WithMessage("MustBe18");
+                                       .Must(BeAtLeast18YearsOld).WithMessage(localizer["MustBe18"]);
         }
         private bool BeAtLeast18YearsOld(DateTime dateOfBirth)
         {

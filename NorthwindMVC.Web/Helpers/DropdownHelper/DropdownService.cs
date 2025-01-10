@@ -13,22 +13,14 @@ public class DropdownService : IDropdownService
 
     public async Task<IEnumerable<SelectListItem>> GetEmployeesDropdownList(string? searchTerm)
     {
-        var employees = await unitOfWork.EmployeeRepository.GetAllList();
+        var query = unitOfWork.EmployeeRepository.Find(e =>
+            string.IsNullOrWhiteSpace(searchTerm) ||
+            e.FirstName.ToLower().Contains(searchTerm) ||
+            e.LastName.ToLower().Contains(searchTerm)); //querable
 
-        // If no search term, return the top five employees for initial load
-        if (string.IsNullOrEmpty(searchTerm))
-        {
-            employees = employees.Take(5).ToList();
-        }
-        else
-        {
-            // Search through the full employee list
-            employees = employees.Where(e =>
-                e.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                e.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
+        
 
-        return employees.Select(e => new SelectListItem
+        return query.Select(e => new SelectListItem
         {
             Value = e.Id.ToString(),
             Text = e.FirstName + " " + e.LastName,

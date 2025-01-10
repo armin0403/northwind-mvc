@@ -58,8 +58,8 @@ namespace NorthwindMVC.Web.Controllers
         public async Task<IActionResult> GetEmployeeDropdown(string? searchTerm)
         {
             var employees = await _dropdownService.GetEmployeesDropdownList(searchTerm);
-            var results = employees.Select(employees => new { id= employees.Value, text = employees.Text });
-            return Json(new {results});
+            var results = employees.Select(employees => new { id = employees.Value, text = employees.Text });
+            return Json(new { results });
         }
 
         [HttpPost]
@@ -69,7 +69,7 @@ namespace NorthwindMVC.Web.Controllers
             ValidationResult result = await _validator.ValidateAsync(employeeVM);
             if (!result.IsValid)
             {
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
@@ -82,7 +82,7 @@ namespace NorthwindMVC.Web.Controllers
             try
             {
                 var employee = _mapper.Map<Employee>(employeeVM);
-                await _photoService.AddPhotoAsync(photoUpload, employee, "uploads/employee");
+                await _photoService.AddPhotoAsync(photoUpload, employee, "employee");
                 await _employeeService.Add(employee);
                 _toastr.Success(_translate["AddEmploySuc"]);
                 return RedirectToAction("Index");
@@ -108,65 +108,56 @@ namespace NorthwindMVC.Web.Controllers
         public async Task<IActionResult> Edit(int id, IFormFile photoUpload, EmployeeViewModel employeeVM)
         {
             var employeeEdit = await _employeeService.GetById(id);
-            if(photoUpload != null && photoUpload.Length > 0)
+            if (photoUpload != null && photoUpload.Length > 0)
             {
                 await _photoService.DeletePhotoAsync(employeeEdit.PhotoPath);
-                var newPhoto = await _photoService.AddPhotoAsync(photoUpload, employeeVM, "uploads/employee");
+                var newPhoto = await _photoService.AddPhotoAsync(photoUpload, employeeVM, "employee");
                 employeeVM.PhotoPath = newPhoto;
             }
             else
             {
                 employeeVM.PhotoPath = employeeEdit.PhotoPath;
             }
+
             _mapper.Map(employeeVM, employeeEdit);
-            
-            if(!string.IsNullOrEmpty(employeeVM.PhotoPath))
+
+            if (!string.IsNullOrEmpty(employeeVM.PhotoPath))
             {
                 employeeEdit.PhotoPath = employeeVM.PhotoPath;
             }
-            
+
             await _employeeService.Update(employeeEdit);
+            _toastr.Success(_translate["EditSuccessful"]);
+
             return RedirectToAction("Index");
         }
 
 
         public async Task<IActionResult> Delete(int id)
         {
+            var employee = await _employeeService.GetById(id);
+            if (employee == null) return View("Error");
+
             try
             {
-                var employee = await _employeeService.GetById(id);
-                if (employee == null) return View("Error");
-
-                try
+                var isDeleted = await _employeeService.DeleteEmployeeAsync(employee);
+                if (isDeleted)
                 {
-                    
-                    var isDeleted = await _employeeService.DeleteEmployeeAsync(employee);
-
-                    if (isDeleted)
-                    {
-                        await _photoService.DeletePhotoAsync(employee.PhotoPath);
-                        _toastr.Success("uspješno");
-                    }
-                    else
-                    {
-                        _toastr.Warning("neuspjesno");
-                    }
-
+                    _toastr.Success(_translate["EmployeeDeleteSuc"]);
                 }
-                catch(Exception ex)
+                else
                 {
-                    _toastr.Danger("Error happened");
+                    _toastr.Danger(_translate["EmployeeUnsuc"]);
                 }
-                return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch
             {
-                _toastr.Danger("Can't delete this user!");
-                return View("Index");
+                _toastr.Danger("Error happened");
             }
-        }
 
-        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")
+            return RedirectToAction("Index");
+        }
+            public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")
         {
             return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm});
         }

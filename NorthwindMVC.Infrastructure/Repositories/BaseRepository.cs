@@ -27,7 +27,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicte)
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicte)
         {
             return _dbContext.Set<TEntity>().Where(predicte);
         }
@@ -37,7 +37,7 @@ namespace NorthwindMVC.Infrastructure.Repositories
            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IQueryable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAllQueryable()
         {
             return _dbContext.Set<TEntity>();
         }

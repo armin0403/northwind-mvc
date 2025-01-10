@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NorthwindMVC.Core.Models;
 using NorthwindMVC.Infrastructure;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Services;

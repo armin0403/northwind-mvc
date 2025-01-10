@@ -1,7 +1,8 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using NorthwindMVC.Core.Models;
+using NorthwindMVC.Services.Services;
 using NorthwindMVC.Web;
-using NorthwindMVC.Web.CustomExceptionMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -12,6 +13,8 @@ builder.Services.AddLocalization();
 builder.Services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+
+builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
 
 
 var app = builder.Build();
