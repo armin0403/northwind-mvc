@@ -4,6 +4,6 @@ namespace NorthwindMVC.Web.Helpers
 {
     public interface IDropdownService
     {
-        Task<IEnumerable<SelectListItem>> GetEmployeesDropdownList(string searchTerm);
+        Task<IEnumerable<SelectListItem>> GetEmployeesDropdownList(string? searchTerm);
     }
 }

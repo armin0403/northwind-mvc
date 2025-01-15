@@ -135,7 +135,7 @@
   <data name="CantDelete" xml:space="preserve">
     <value>Zaposlenika nije moguće izbrisati.</value>
   </data>
-  <data name="ChoseFile" xml:space="preserve">
+  <data name="ChooseFile" xml:space="preserve">
     <value>Izaberite fajl</value>
   </data>
   <data name="City" xml:space="preserve">
@@ -182,6 +182,9 @@
   </data>
   <data name="English" xml:space="preserve">
     <value>Engleski</value>
+  </data>
+  <data name="ErrorHappened" xml:space="preserve">
+    <value>Došlo je do greške.</value>
   </data>
   <data name="Extension" xml:space="preserve">
     <value>Ekstencija</value>

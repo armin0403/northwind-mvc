@@ -77,7 +77,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload">
-                                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChoseFile"]</label>
+                                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChooseFile"]</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">@Translate["Upload"]</span>
@@ -139,8 +139,6 @@
             }
         });
 
-
-        console.log(@Html.Raw(Json.Serialize(Model.EmployeeDropdown)));
         var employeeData = @Html.Raw(Json.Serialize(Model.EmployeeDropdown))
                     .map(function (item) {
             return { id: item.value, text: item.text };

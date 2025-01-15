@@ -152,7 +152,7 @@ namespace NorthwindMVC.Web.Controllers
             }
             catch
             {
-                _toastr.Danger("Error happened");
+                _toastr.Danger(_translate["ErrorHappened"]);
             }
 
             return RedirectToAction("Index");

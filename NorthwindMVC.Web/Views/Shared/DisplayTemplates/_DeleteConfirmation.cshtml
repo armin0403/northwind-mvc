@@ -26,12 +26,9 @@
             const rowId = deleteModal.attr('data-row-id');
             const controllerName = deleteModal.attr('data-controller-name');
 
-            // Redirect to delete action
             const deleteUrl = `/${controllerName}/Delete?id=${rowId}`;
-            console.log(`Redirecting to: ${deleteUrl}`);
             window.location.href = deleteUrl;
 
-            // Hide the modal
             deleteModal.modal('hide');
         };
     });
