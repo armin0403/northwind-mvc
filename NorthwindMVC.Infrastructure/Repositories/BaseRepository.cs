@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using NorthwindMVC.Infrastucture;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindMVC.Infrastructure.Repositories
 {
@@ -17,12 +16,18 @@ namespace NorthwindMVC.Infrastructure.Repositories
            await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public void Delete(TEntity entity)
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            _dbContext.Set<TEntity>().Remove(entity);
+           return await _dbContext.Set<TEntity>().AnyAsync(predicate);
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicte)
+        public async Task DeleteAsync(TEntity entity)
+        {
+            _dbContext.Set<TEntity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicte)
         {
             return _dbContext.Set<TEntity>().Where(predicte);
         }
@@ -32,11 +37,21 @@ namespace NorthwindMVC.Infrastructure.Repositories
            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAllQueryable()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbContext.Set<TEntity>();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllList()
+        {
+            return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+                
         public async Task UpdateAsync(TEntity entity)
         {
            _dbContext.Set<TEntity>().Update(entity);

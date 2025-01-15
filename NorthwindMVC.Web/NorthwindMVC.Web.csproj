@@ -19,12 +19,20 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Northwind.MVC.Services\NorthwindMVC.Services.csproj" />
     <ProjectReference Include="..\NorthwindMVC.Core\NorthwindMVC.Core.csproj" />
     <ProjectReference Include="..\NorthwindMVC.Infrastructure\NorthwindMVC.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\employee\" />
   </ItemGroup>
 
 </Project>

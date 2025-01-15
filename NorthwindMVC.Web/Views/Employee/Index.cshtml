@@ -1,0 +1,74 @@
+﻿@model PagedList<NorthwindMVC.Core.Models.Employee>
+<section class="content">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-12">
+             <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@Translate["EmployeeTable"]</h3>
+                    </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <a asp-controller="Employee" asp-action="Add" class="btn btn-secondary btn-sm"> 
+                            <i class="fas fa-user-plus"></i> @Translate["AddEmployee"]
+                        </a>
+                    </div>
+                    <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                        <form asp-action="Search" asp-controller="Employee" method="get" style="display: flex; margin: 0; padding: 0;">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["Search"]" />
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                  @Html.Partial("DisplayTemplates/_ContextMenu")
+                  @Html.Partial("DisplayTemplates/_DeleteConfirmation")
+                  <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>@Translate["FirstName"]</th>
+                    <th>@Translate["LastName"]</th>
+                    <th>@Translate["Dateofbirth"]</th>
+                    <th>@Translate["Title"]</th>
+                    <th>@Translate["HomePhone"]</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach (var employee in Model.Items)
+                  {
+                    <tr class="context-menu-row"
+                        data-id="@employee.Id"
+                        data-controller="Employee"
+                        data-edit-action="EditEmployee"
+                        data-delete-action="DeleteEmployee">
+                        <td>@employee.FirstName</td>
+                        <td>@employee.LastName</td>
+                        <td>@employee.DateOfBirth</td>
+                        <td>@employee.Title</td>
+                        <td>@employee.HomePhone</td>
+                    </tr>
+                  }                                
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>@Translate["FirstName"]</th>
+                    <th>@Translate["LastName"]</th>
+                    <th>@Translate["Dateofbirth"]</th>
+                    <th>@Translate["Title"]</th>
+                    <th>@Translate["HomePhone"]</th>
+                  </tr>
+                  </tfoot>
+                  </table>
+                </div>
+                @Html.DisplayFor(e => e.Pager)
+             </div>
+          </div>
+       </div>
+      </div>
+</section>

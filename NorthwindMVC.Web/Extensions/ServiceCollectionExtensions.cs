@@ -1,10 +1,15 @@
 ﻿using FluentValidation;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NorthwindMVC.Core.Models;
 using NorthwindMVC.Infrastructure;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Services;
+using NorthwindMVC.Services.Services;
 using NorthwindMVC.Web.Helpers;
+using NorthwindMVC.Web.Helpers.ToastNotifications;
+using NorthwindMVC.Web.Validator;
 using NorthwindMVC.Web.ViewModels;
 
 namespace NorthwindMVC.Web
@@ -15,10 +20,22 @@ namespace NorthwindMVC.Web
         {
             services.AddControllersWithViews();
             services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+            services.AddScoped<IValidator<EmployeeViewModel>, EmployeeViewModelValidator>();
+
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IMapper, Mapper>();
+
+            services.RegisterMapsterConfiguration();
+
+            services.AddScoped<IMapper, MapsterMapper.Mapper>();
+            services.AddScoped<IToastr, Toastr>();
             services.AddScoped<LanguageService>();
+
+            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IPaginationService, PaginationService>();
+            services.AddScoped<IDropdownService, DropdownService>();
 
             services.AddDbContext<NorthwindDbContext>((sp, opts) =>
             {
@@ -33,6 +50,7 @@ namespace NorthwindMVC.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             }); //for sessions
+
 
             return services;
         }

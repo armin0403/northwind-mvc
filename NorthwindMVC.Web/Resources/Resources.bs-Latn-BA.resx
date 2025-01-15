@@ -117,8 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>Dodaj zaposlenika</value>
+  </data>
+  <data name="AddEmployFail" xml:space="preserve">
+    <value>Zaposlenik nije dodan.</value>
+  </data>
+  <data name="AddEmploySuc" xml:space="preserve">
+    <value>Zaposlenik uspješno dodan.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
   <data name="Bosnian" xml:space="preserve">
     <value>Bosanski</value>
+  </data>
+  <data name="CantDelete" xml:space="preserve">
+    <value>Zaposlenika nije moguće izbrisati.</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Izaberite fajl</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Grad</value>
   </data>
   <data name="ConfirmPasswordValidation" xml:space="preserve">
     <value>Vaša lozinka mora biti ista kao i iznad.</value>
@@ -126,11 +147,17 @@
   <data name="ConfirmPasswordValidationRequired" xml:space="preserve">
     <value>Potvrdite vašu lozinku.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Država</value>
+  </data>
   <data name="Dateofbirth" xml:space="preserve">
     <value>Datum rođenja</value>
   </data>
   <data name="DateOfBirthValidationRequired" xml:space="preserve">
     <value>Datum rođenja neophodan.</value>
+  </data>
+  <data name="EditSuccessful" xml:space="preserve">
+    <value>Uspjšeno spašene promjene.</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -138,26 +165,56 @@
   <data name="EmailValidationRequired" xml:space="preserve">
     <value>Email neophodan.</value>
   </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Zaposlenik</value>
+  </data>
+  <data name="EmployeeDeleteSuc" xml:space="preserve">
+    <value>Zaposlenik uspješno izbrisan.</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Zaposlenici</value>
+  </data>
+  <data name="EmployeeTable" xml:space="preserve">
+    <value>Tabela zaposlenih</value>
+  </data>
+  <data name="EmployeeUnsuc" xml:space="preserve">
+    <value>Zaposlenik nije izbrisan.</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>Engleski</value>
+  </data>
+  <data name="ErrorHappened" xml:space="preserve">
+    <value>Došlo je do greške.</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Ekstencija</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Polje potrebno.</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
   </data>
   <data name="FirstNameValidationLength" xml:space="preserve">
-    <value>Ime mora da bude između 1 i 10 karaktera.</value>
+    <value>Ime mora da bude između 2 i 10 karaktera.</value>
   </data>
   <data name="FirstNameValidationRequired" xml:space="preserve">
     <value>Ime neophodno.</value>
   </data>
+  <data name="HireDate" xml:space="preserve">
+    <value>Datum zapošljavanja</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Početna</value>
+  </data>
+  <data name="HomePhone" xml:space="preserve">
+    <value>Kontakt broj</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Prezime</value>
   </data>
   <data name="LastNameValidationLength" xml:space="preserve">
-    <value>Prezime mora da bude između 1 i 10 karaktera.</value>
+    <value>Prezime mora da bude između 2 i 10 karaktera.</value>
   </data>
   <data name="LastNameValidationRequired" xml:space="preserve">
     <value>Prezime neophodno.</value>
@@ -168,17 +225,53 @@
   <data name="LogOut" xml:space="preserve">
     <value>Odjavi se</value>
   </data>
+  <data name="MustBe18" xml:space="preserve">
+    <value>Korisnik more biti stariji od 18 godina</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Bilješke</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Lozinka</value>
   </data>
   <data name="PasswordValidationRequired" xml:space="preserve">
     <value>Lozinka mora biti između 8 i 18 karaktera.</value>
   </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Slika</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Poštanski broj</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Regija</value>
+  </data>
   <data name="RegisterHere" xml:space="preserve">
     <value>Registruj se ovdje</value>
   </data>
+  <data name="ReportsTo" xml:space="preserve">
+    <value>Odgovara</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Spasi promjene</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Pretraga</value>
+  </data>
   <data name="SignInHere" xml:space="preserve">
     <value>Prijavite se ovdje.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titula</value>
+  </data>
+  <data name="TitleOfCourtesy" xml:space="preserve">
+    <value>Titula ljubaznosti</value>
+  </data>
+  <data name="TotalItemNumber" xml:space="preserve">
+    <value>Ukupan broj stavki</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>
