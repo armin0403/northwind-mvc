@@ -43,7 +43,7 @@ namespace NorthwindMVC.Web.Controllers
             return View("Index", employees);
         }
 
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> AddView()
         {
             var employeeDropdown = (await _dropdownService.GetEmployeesDropdownList(null)).Take(5);
             var viewModel = new EmployeeViewModel
@@ -51,7 +51,7 @@ namespace NorthwindMVC.Web.Controllers
                 EmployeeDropdown = employeeDropdown
             };
 
-            return View(viewModel);
+            return PartialView("_add", viewModel);
         }
 
         [HttpGet]
@@ -76,7 +76,7 @@ namespace NorthwindMVC.Web.Controllers
                 var employeeDropdown = (await _dropdownService.GetEmployeesDropdownList(null)).Take(5);
                 employeeVM.EmployeeDropdown = employeeDropdown;
 
-                return View(employeeVM);
+                return PartialView("_add", employeeVM);
             }
 
             try
@@ -85,23 +85,23 @@ namespace NorthwindMVC.Web.Controllers
                 await _photoService.AddPhotoAsync(photoUpload, employee, "employee");
                 await _employeeService.Add(employee);
                 _toastr.Success(_translate["AddEmploySuc"]);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
+				return Json(new { success = true, redirectUrl = Url.Action("Index", "Employee") });
+			}
+			catch (Exception ex)
             {
                 _toastr.Warning(_translate["AddEmployFail"]);
                 return View(employeeVM);
             }
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> EditView(int id)
         {
             var employee = await _employeeService.GetById(id);
 
             var employeeVM = _mapper.Map<EmployeeViewModel>(employee);
             var employeeDropdown = (await _dropdownService.GetEmployeesDropdownList(null)).Take(5);
             employeeVM.EmployeeDropdown = employeeDropdown;
-            return View(employeeVM);
+            return PartialView("_edit", employeeVM);
         }
 
         [HttpPost]
@@ -132,6 +132,11 @@ namespace NorthwindMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> DeleteView(int id)
+        {
+            var employee = await _employeeService.GetById(id);
+            return PartialView("_delete", employee);
+        }
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -155,9 +160,10 @@ namespace NorthwindMVC.Web.Controllers
                 _toastr.Danger(_translate["ErrorHappened"]);
             }
 
-            return RedirectToAction("Index");
+        return Json(new { success = true, redirectUrl = Url.Action("Index", "Employee") });
         }
-            public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")
+
+        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5,  string searchTerm = "")
         {
             return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm});
         }

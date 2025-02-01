@@ -1,0 +1,193 @@
+﻿@model NorthwindMVC.Web.ViewModels.ProductViewModel
+
+<form id="editProductForm">
+    <div class="modal-header">
+        <h4 class="modal-title">@Translate["EditEmployee"]</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <input type="hidden" asp-for="Id"/>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>@Translate["ProductName"]</label>
+            <input type="text" class="form-control" asp-for="ProductName" />
+            <span class="text-danger" asp-validation-for="ProductName"></span>
+        </div>
+        <div class="form-group">
+            <label>@Translate["Category"]</label>
+            <select class="select2" style="width: 100%;" id="categoryIdDropDown" asp-for="CategoryId" asp-items="Model.CategoriesDropdown">
+                <option value="" selected>None</option>
+            </select>
+            <div>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>@Translate["Supplier"]</label>
+            <select class="select2" style="width: 100%;" id="suplierIdDropDown" asp-for="SupplierId" asp-items="Model.SuppliersDropdown">
+                <option value="" selected>None</option>
+            </select>
+            <div>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>@Translate["QuantityPerUnit"]</label>
+                    <input type="number" class="form-control" asp-for="QuantityPerUnit" />
+                    <span class="text-danger" asp-validation-for="QuantityPerUnit"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["UnitsInStock"]</label>
+                    <input type="number" class="form-control" asp-for="UnitsInStock" />
+                    <span class="text-danger" asp-validation-for="UnitsInStock"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["UnitPrice"]</label>
+                    <input type="number" class="form-control" asp-for="UnitPrice" />
+                    <span class="text-danger" asp-validation-for="UnitPrice"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>@Translate["UnitsOnOrder"]</label>
+                    <input type="number" class="form-control" asp-for="UnitsOnOrder" />
+                    <span class="text-danger" asp-validation-for="UnitsOnOrder"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["ReOrderLevel"]</label>
+                    <input type="number" class="form-control" asp-for="ReOrderLevel" />
+                    <span class="text-danger" asp-validation-for="ReOrderLevel"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["Discontinued"]</label>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="Discontinued" value="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">@Translate["CloseWindow"]</button>
+        <button type="submit" class="btn btn-primary">@Translate["AddNewShipper"]</button>
+    </div>
+</form>
+
+<script>
+    function initializeSelect2Dropdowns() {
+        var categoryData = @Html.Raw(Json.Serialize(Model.CategoriesDropdown))
+                    .map(function (item) {
+            return { id: item.value, text: item.text };
+        });
+
+        $('#categoryIdDropDown').select2({
+            placeholder: "Select a category",
+            dropdownParent: $('#generalModalLG'),
+            data: categoryData,
+            minimumInputLength: 0,
+            ajax: {
+                url: '/Product/GetCategoryDropdown',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return { searchTerm: params.term };
+                },
+                processResults: function (data) {
+                    var results = data.results.slice(0, 5);
+                    return { results: results };
+                },
+                cache: true
+            }
+        });
+        var preselectedValue = '@Model.CategoryId';
+
+
+        if (preselectedValue) {
+            $('#categoryIdDropDown').val(preselectedValue).trigger('change');
+        }
+
+        var supplierData = @Html.Raw(Json.Serialize(Model.SuppliersDropdown))
+                    .map(function (item) {
+            return { id: item.value, text: item.text };
+        });
+
+        $('#suplierIdDropDown').select2({
+            placeholder: "Select a supplier",
+            dropdownParent: $('#generalModalLG'),
+            data: supplierData,
+            minimumInputLength: 0,
+            ajax: {
+                url: '/Product/GetSupplierDropdown',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return { searchTerm: params.term };
+                },
+                processResults: function (data) {
+                    var results = data.results.slice(0, 5);
+                    return { results: results };
+                },
+                cache: true
+            }
+        });
+        var preselectedValue = '@Model.SupplierId';
+
+        if (preselectedValue) {
+            $('#suplierIdDropDown').val(preselectedValue).trigger('change');
+        }
+    }
+
+    $(document).ready(function () {
+        // Initialize select2 dropdowns when the modal is shown
+        $('#generalModalLG').on('shown.bs.modal', function () {
+            initializeSelect2Dropdowns();
+        });
+
+        // Optionally clear modal content on modal hide
+        $('#generalModalLG').on('hidden.bs.modal', function () {
+            $(this).find('.modal-body').empty(); // Clear modal body to avoid conflicts
+        });
+
+        // Handle form submission
+        $('#editProductForm').submit(function (e) {
+            e.preventDefault(); // Prevent default form submission
+            var formData = new FormData(e.currentTarget);
+
+            console.log('Form data:', formData);
+
+            $.ajax({
+                type: "POST",
+                url: '/Product/Edit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        // Hide modal and redirect
+                        $("#generalModalLG").modal('hide');
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        // Load new modal content
+                        var modalBodyContent = $(response).find('.modal-body').html();
+                        $('#generalModalLG .modal-body').html(modalBodyContent);
+
+                        // Show modal and reinitialize dropdowns
+                        $('#generalModalLG').modal('show');
+                        initializeSelect2Dropdowns();
+                    }
+                },
+                error: function (error) {
+                    console.error('Error submitting the form:', error);
+
+                    // Optional: Inform the user of the error
+                    alert('An error occurred while submitting the form. Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
+

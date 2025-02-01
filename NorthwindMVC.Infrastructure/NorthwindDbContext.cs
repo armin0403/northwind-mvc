@@ -16,6 +16,10 @@ namespace NorthwindMVC.Infrastructure
         public DbSet<Territory> Territories { get; set; }
         public DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -48,6 +48,10 @@
         $.widget.bridge('uibutton', $.ui.button);
     </script>
 
+    <!-- InputMask -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -86,15 +90,6 @@
                 <span class="brand-text font-weight-light">NorthWind-MVC</span>
             </a>
             <div class="sidebar">
-                <!-- User Panel -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block"></a>
-                    </div>
-                </div>
                 <!-- Sidebar Navigation -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -106,11 +101,77 @@
                         </li>
                         <li class="nav-item">
                             <a asp-action="Index" asp-controller="Employee" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>@Translate["Employees"]</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon 	fas fa-balance-scale"></i>
+                                <p>
+                                    Products
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Product" class="nav-link">
+                                        <i class="fas fa-boxes nav-icon"></i>
+                                        <p>All products</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-laptop nav-icon"></i>
+                                        <p>Electronics</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-hamburger nav-icon"></i>
+                                        <p>Food</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-couch nav-icon"></i>
+                                        <p>Furniture</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-car nav-icon"></i>
+                                        <p>Vehicles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-tshirt nav-icon"></i>
+                                        <p>Clothing</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Category" class="nav-link">
+                                        <i class="fas fa-expand-arrows-alt nav-icon"></i>
+                                        <p>Other categories</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Shipper" class="nav-link">
+                                <i class="nav-icon fas fa-shipping-fast"></i>
+                                <p>@Translate["Shippers"]</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Supplier" class="nav-link">
+                                <i class="nav-icon fas fa-boxes"></i>
+                                <p>@Translate["Supplyers"]</p>
+                            </a>
+                        </li>
                     </ul>
+                    
                 </nav>
                 <!-- Logout -->
                 <form asp-action="Logout" asp-controller="User">
@@ -191,6 +252,11 @@
                     timeout);
             });
         };
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('[data-mask]').inputmask();
+        });
     </script>
     @Toastr.Display()
     @await RenderSectionAsync("Scripts", required: false)

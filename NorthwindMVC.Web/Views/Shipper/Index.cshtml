@@ -1,0 +1,136 @@
+﻿@model PagedList<NorthwindMVC.Core.Models.Shipper>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@Translate["Shippers"]</h3>
+        <form>
+        <div class="card-tools d-flex justify-content-end align-items-center">
+            <div class="input-group" style="width: 250px;">
+                <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["Search"]" aria-label="Search Shippers" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <button data-toggle="modal" data-target="#generalModal" data-action="add" class="btn btn-secondary ml-2" aria-label="Add Shipper">
+                @Translate["AddShipper"]
+                <i class="fas fa-plus"></i>
+                <i class="fas fa-shipping-fast"></i>
+            </button>
+        </div>
+        </form>
+    </div>
+    @await Html.PartialAsync("DisplayTemplates/_generalModal")
+    <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>                
+                <tr>
+                    <th style="width: 1%">
+                        #
+                    </th>
+                    <th style="width: 20%">
+                        @Translate["ShipperName"]
+                    </th>
+                    <th style="width: 20%">
+                        @Translate["ShipperContact"]
+                    </th>
+                    <th style="width:59%">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shipper in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            #
+                        </td>                        
+                        <td>
+                            <a>
+                                @shipper.CompanyName
+                            </a>                            
+                        </td>
+                        <td>
+                            @shipper.Phone
+                        </td>
+                        <td class="project-actions text-right">
+                            <button data-toggle="modal" data-target="#generalModal" data-action="edit" data-id="@shipper.Id" class="btn btn-info btn-sm">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                                @Translate["EditShipper"]
+                            </button>
+                            <button data-toggle="modal" data-target="#generalModal" data-action="delete" data-id="@shipper.Id" class="btn btn-danger btn-sm" href="#">
+                                <i class="fas fa-trash">
+                                </i>
+                                @Translate["DeleteShipper"]
+                            </button>
+                        </td>
+                    </tr>
+                }                
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="form-group">
+            @Html.DisplayFor(e=>e.Pager)
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#generalModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var action = button.data('action');
+            var shipperId = button.data('id');
+            var modal = $(this);
+
+            if (action === 'edit') {
+                $.ajax({
+                    url: '/Shipper/Edit',
+                    type: 'GET',
+                    data: { id: shipperId },
+                    success: function (response) {
+                        modal.find('.modal-content').html(response);
+                        modal.modal('show');
+                    },
+                    error: function () {
+                        console.error('Faild to load modal content');
+                    }
+                });
+            } else if (action === 'delete') {
+                $.ajax({
+                    url: '/Shipper/DeleteView',
+                    type: 'GET',
+                    data: { id: shipperId },
+                    success: function (response) {
+                        modal.find('.modal-content').html(response);
+                        modal.modal('show');
+                    },
+                    error: function () {
+                        console.error('Failed to load modal content');
+                    }
+                });
+            } else if (action === 'add') {
+                $.ajax({
+                    url:'/Shipper/Add',
+                    type: 'GET',
+                    success: function (response) {
+                        modal.find('.modal-content').html(response);
+                        modal.modal('show');
+                    },
+                    error: function () {
+                        console.error('Failed to load content');
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+
+
+
+
+

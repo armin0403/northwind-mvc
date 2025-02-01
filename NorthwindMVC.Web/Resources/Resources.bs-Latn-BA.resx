@@ -126,8 +126,32 @@
   <data name="AddEmploySuc" xml:space="preserve">
     <value>Zaposlenik uspješno dodan.</value>
   </data>
+  <data name="AddFailed" xml:space="preserve">
+    <value>Dodavanje nije uspijelo.</value>
+  </data>
+  <data name="AddNewCategory" xml:space="preserve">
+    <value>Dodaj novu kategoriju</value>
+  </data>
+  <data name="AddNewEmployee" xml:space="preserve">
+    <value>Dodaj novog zaposlenika</value>
+  </data>
+  <data name="AddNewProduct" xml:space="preserve">
+    <value>Dodaj novi proizvod</value>
+  </data>
+  <data name="AddNewShipper" xml:space="preserve">
+    <value>Dodaj novog prijevoznika</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Adresa</value>
+  </data>
+  <data name="AddShipper" xml:space="preserve">
+    <value>Dodaj prijevoznika</value>
+  </data>
+  <data name="AddSuccessful" xml:space="preserve">
+    <value>Uspješno dodano.</value>
+  </data>
+  <data name="AddSupplier" xml:space="preserve">
+    <value>Dodaj novog dobavljača</value>
   </data>
   <data name="Bosnian" xml:space="preserve">
     <value>Bosanski</value>
@@ -135,17 +159,44 @@
   <data name="CantDelete" xml:space="preserve">
     <value>Zaposlenika nije moguće izbrisati.</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategorije</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorija</value>
+  </data>
+  <data name="CategoryDescription" xml:space="preserve">
+    <value>Opis kategorije</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Naziv kategorije</value>
+  </data>
+  <data name="CategoryPhoto" xml:space="preserve">
+    <value>Slika kategorije</value>
+  </data>
   <data name="ChooseFile" xml:space="preserve">
     <value>Izaberite fajl</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>Grad</value>
   </data>
+  <data name="CloseWindow" xml:space="preserve">
+    <value>Zatvori prozor</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Ime kompanije</value>
+  </data>
   <data name="ConfirmPasswordValidation" xml:space="preserve">
     <value>Vaša lozinka mora biti ista kao i iznad.</value>
   </data>
   <data name="ConfirmPasswordValidationRequired" xml:space="preserve">
     <value>Potvrdite vašu lozinku.</value>
+  </data>
+  <data name="ContactName" xml:space="preserve">
+    <value>Ime kontakta</value>
+  </data>
+  <data name="ContactTitle" xml:space="preserve">
+    <value>Titula kontakta</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Država</value>
@@ -156,8 +207,53 @@
   <data name="DateOfBirthValidationRequired" xml:space="preserve">
     <value>Datum rođenja neophodan.</value>
   </data>
+  <data name="DeleteCategory" xml:space="preserve">
+    <value>Izbriši kategoriju</value>
+  </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>Brisanje nije uspijelo.</value>
+  </data>
+  <data name="DeleteQuestionCategory" xml:space="preserve">
+    <value>Da li ste sigurni da želite izbrisati ovu kategoriju?</value>
+  </data>
+  <data name="DeleteQuestionEmployee" xml:space="preserve">
+    <value>Da li ste sigurni da želite izbrisati ovog zaposlenika?</value>
+  </data>
+  <data name="DeleteQuestionProduct" xml:space="preserve">
+    <value>Da li ste sigurni da želite izbrisati ovaj proizvod?</value>
+  </data>
+  <data name="DeleteQuestionShipper" xml:space="preserve">
+    <value>Da li ste sigurni da želite izbrisati ovog prevoznika?</value>
+  </data>
+  <data name="DeleteQuestionSupplyer" xml:space="preserve">
+    <value>Da li ste sigurni da želite izbrisati ovog dobavljača?</value>
+  </data>
+  <data name="DeleteShipper" xml:space="preserve">
+    <value>Izbriši prijevoznika</value>
+  </data>
+  <data name="DeleteSuccessful" xml:space="preserve">
+    <value>Uspješno izbrisano.</value>
+  </data>
+  <data name="DeleteSupplier" xml:space="preserve">
+    <value>Izbriši dobavljača</value>
+  </data>
+  <data name="Discontinued" xml:space="preserve">
+    <value>Ukinut</value>
+  </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Uredi kategoriju</value>
+  </data>
+  <data name="EditEmployee" xml:space="preserve">
+    <value>Uredite zaposlenika</value>
+  </data>
+  <data name="EditShipper" xml:space="preserve">
+    <value>Uredi prijevoznika</value>
+  </data>
   <data name="EditSuccessful" xml:space="preserve">
     <value>Uspjšeno spašene promjene.</value>
+  </data>
+  <data name="EditSupplier" xml:space="preserve">
+    <value>Uredi dobavljača</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -189,6 +285,9 @@
   <data name="Extension" xml:space="preserve">
     <value>Ekstencija</value>
   </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Faks</value>
+  </data>
   <data name="FieldRequired" xml:space="preserve">
     <value>Polje potrebno.</value>
   </data>
@@ -206,6 +305,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Početna</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Početna stranica</value>
   </data>
   <data name="HomePhone" xml:space="preserve">
     <value>Kontakt broj</value>
@@ -228,6 +330,12 @@
   <data name="MustBe18" xml:space="preserve">
     <value>Korisnik more biti stariji od 18 godina</value>
   </data>
+  <data name="NewProduct" xml:space="preserve">
+    <value>Novi proizvod</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Bilješke</value>
   </data>
@@ -243,11 +351,26 @@
   <data name="PostalCode" xml:space="preserve">
     <value>Poštanski broj</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>Proizvod</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Naziv proizvoda</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Proizvodi</value>
+  </data>
+  <data name="QuantityPerUnit" xml:space="preserve">
+    <value>Količina po jedinici</value>
+  </data>
   <data name="Region" xml:space="preserve">
     <value>Regija</value>
   </data>
   <data name="RegisterHere" xml:space="preserve">
     <value>Registruj se ovdje</value>
+  </data>
+  <data name="ReOrderLevel" xml:space="preserve">
+    <value>Nivo preuređenja</value>
   </data>
   <data name="ReportsTo" xml:space="preserve">
     <value>Odgovara</value>
@@ -258,8 +381,41 @@
   <data name="Search" xml:space="preserve">
     <value>Pretraga</value>
   </data>
+  <data name="SearchCategory" xml:space="preserve">
+    <value>Pretraži kategorije</value>
+  </data>
+  <data name="SearchSupplier" xml:space="preserve">
+    <value>Pretraži dobavljača</value>
+  </data>
+  <data name="Shipper" xml:space="preserve">
+    <value>Prijevoznik</value>
+  </data>
+  <data name="ShipperAddedSuccessfully" xml:space="preserve">
+    <value>Novi prijevoznik uspješno dodan.</value>
+  </data>
+  <data name="ShipperContact" xml:space="preserve">
+    <value>Kontakt prijevoznika</value>
+  </data>
+  <data name="ShipperName" xml:space="preserve">
+    <value>Ime prijevoznika</value>
+  </data>
+  <data name="ShipperNotAdded" xml:space="preserve">
+    <value>Novi prijevoznik nije dodan.</value>
+  </data>
+  <data name="Shippers" xml:space="preserve">
+    <value>Prijevoznici</value>
+  </data>
   <data name="SignInHere" xml:space="preserve">
     <value>Prijavite se ovdje.</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Dobavljač</value>
+  </data>
+  <data name="Suppliers" xml:space="preserve">
+    <value>Dobavljači</value>
+  </data>
+  <data name="SupplierTable" xml:space="preserve">
+    <value>Tabela dobavljača</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Titula</value>
@@ -270,6 +426,15 @@
   <data name="TotalItemNumber" xml:space="preserve">
     <value>Ukupan broj stavki</value>
   </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Cijena</value>
+  </data>
+  <data name="UnitsInStock" xml:space="preserve">
+    <value>Preostalo na lageru</value>
+  </data>
+  <data name="UnitsOnOrder" xml:space="preserve">
+    <value>Količina po narudžbi</value>
+  </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
@@ -279,7 +444,13 @@
   <data name="UsernameValidationRequired" xml:space="preserve">
     <value>Korisničko ime neophodno.</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Upozorenje</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Dobro došli</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Da</value>
   </data>
 </root>

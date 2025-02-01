@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using NorthwindMVC.Core.Models;
 using NorthwindMVC.Infrastructure;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 using NorthwindMVC.Services;
@@ -21,9 +19,17 @@ namespace NorthwindMVC.Web
             services.AddControllersWithViews();
             services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
             services.AddScoped<IValidator<EmployeeViewModel>, EmployeeViewModelValidator>();
+            services.AddScoped<IValidator<ShipperViewModel>, ShipperViewModelValidator>();
+            services.AddScoped<IValidator<CategoryViewModel>, CategoryViewModelValidator>();
+            services.AddScoped<IValidator<SupplierViewModel>, SupplierViewModelValidator>();
+            services.AddScoped<IValidator<ProductViewModel>, ProductViewModelValidator>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IShipperService, ShipperService>();
+            services.AddScoped<ISupplierService, SupplierService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

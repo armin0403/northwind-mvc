@@ -1,0 +1,113 @@
+﻿@model PagedList<NorthwindMVC.Core.Models.Category>
+
+<div class="col-md-12">
+<form asp-action="Search" asp-controller="Category" method="get">
+	<div class="input-group">
+		<input type="search" name="searchTerm" class="form-control form-control-lg" placeholder="@Translate["SearchCategory"]">
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-lg btn-default">
+				<i class="fa fa-search"></i>
+			</button>
+			<button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#add_CategoryModal">
+				<i class="fas fa-folder-plus"></i>
+				@Translate["AddNewCategory"]
+			</button>
+		</div>
+	</div>
+</form>
+</div>
+@await Html.PartialAsync("_add", new NorthwindMVC.Web.ViewModels.CategoryViewModel())
+@await Html.PartialAsync("_categoryModal")
+@await Html.PartialAsync("DisplayTemplates/_DeleteConfirmation")
+<div id="categoryList" class="row">
+	@foreach (var category in Model.Items)
+	{
+	<div class="col-md-3 mb-3">
+		<div class="card" style="height:500px;">
+			<div class="card-header">
+				<h3 class="card-title">
+					@category.CategoryName
+				</h3>
+				<div class="card-tools">
+					<ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                      <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#categoryModal" data-action="edit" data-id="@category.Id">
+						  <i class="fas fa-pen"></i></button>
+                    </li>
+                    <li class="nav-item">
+                      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#categoryModal" data-action="delete" data-id="@category.Id">
+						  <i class="fas fa-trash"></i></button>
+                    </li>
+                  </ul>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<div class="d-flex justify-content-center align-items-center">
+						<img src="@category.PhotoPath" class="img-fluid" style="width: 258; height: 258;" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="text-container" style="height: 80px; overflow-y: auto;">
+						<p style="margin: 0; text-align: justify;">
+							@category.Description
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button class="btn btn-primary btn-block">Open this category</button>
+			</div>
+		</div>
+	</div>
+	}
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			@Html.DisplayFor(e => e.Pager)
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function () {
+		
+	$('#categoryModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget);
+		var action = button.data('action');// The button that triggered the modal
+		var categoryId = button.data('id');   // Get the category id from the button's data-id attribute
+		var modal = $(this);  // Get the modal itself
+
+		if (action === 'edit') {
+			$.ajax({
+				url: '/Category/Edit',  // Controller action that returns the modal content
+				type: 'GET',
+				data: { id: categoryId },  // Send category id to the server
+				success: function (response) {
+					// Inject the modal content received from the server into the modal body
+					modal.find('.modal-content').html(response);  // Insert content into the modal
+					modal.modal('show');  // Show the modal
+				},
+				error: function () {
+					console.error('Failed to load modal content.');
+				}
+			});
+		} else if (action === 'delete') {
+			$.ajax({
+				url: '/Category/DeleteView',  // Controller action that returns the modal content
+				type: 'GET',
+				data: { id: categoryId },  // Send category id to the server
+				success: function (response) {
+					// Inject the modal content received from the server into the modal body
+					modal.find('.modal-content').html(response);  // Insert content into the modal
+					modal.modal('show');  // Show the modal
+				},
+				error: function () {
+					console.error('Failed to load modal content.');
+				}
+			});
+		}
+	});
+});
+</script>
+

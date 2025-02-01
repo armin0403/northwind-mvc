@@ -1,0 +1,98 @@
+﻿@model PagedList<NorthwindMVC.Core.Models.Supplier>
+@await Html.PartialAsync("DisplayTemplates/_contextMenu")
+@await Html.PartialAsync("DisplayTemplates/_generalModalLG")
+@await Html.PartialAsync("DisplayTemplates/_generalModal")
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@Translate["SupplierTable"]</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-6 d-flex align-items-center">
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#generalModalLG" data-action="add">
+                                    <i class="fas fa-user-plus"></i> @Translate["AddSupplier"]
+                                </button>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                                <form asp-action="Search" asp-controller="Supplier" method="get" style="display: flex; margin: 0; padding: 0;">
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["SearchSupplier"]" />
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-outline-secondary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@Translate["CompanyName"]</th>
+                                    <th>@Translate["ContactName"]</th>
+                                    <th>@Translate["Address"]</th>
+                                    <th>@Translate["Phone"]</th>
+                                    <th>@Translate["HomePage"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var supplier in Model.Items)
+                                {
+                                    <tr class="context-menu-row"
+                                        data-id="@supplier.Id"
+                                        data-controller="Supplier">
+                                        <td>@supplier.CompanyName</td>
+                                        <td>@supplier.ContactName</td>
+                                        <td>@supplier.Phone</td>
+                                        <td>@supplier.Address</td>
+                                        <td>@supplier.HomePage</td>
+                                    </tr>
+                                }                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>@Translate["CompanyName"]</th>
+                                    <th>@Translate["ContactName"]</th>
+                                    <th>@Translate["Address"]</th>
+                                    <th>@Translate["Phone"]</th>
+                                    <th>@Translate["HomePage"]</th>
+                                </tr>
+                            </tfoot>
+                            @Html.DisplayFor(e=>e.Pager)
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+        $('#generalModalLG').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget);
+            var action = button.data('action');
+            var modal = $(this);
+
+            if(action === 'add')
+            {
+                $.ajax({
+                    url: '/Supplier/AddView',
+                    type: 'GET',
+                    success: function(response){
+                        modal.find('.modal-content').html(response);
+                        modal.modal('show');
+                    },
+                    error: function () {
+                        console.error('Failed to load content.')
+                    }
+                });
+            }
+
+        });
+    });
+</script>
