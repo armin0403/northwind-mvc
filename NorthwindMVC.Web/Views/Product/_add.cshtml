@@ -80,7 +80,6 @@
 
 <script>
     function initializeSelect2Dropdowns() {
-        // Initialize Category Dropdown
         var categoryData = @Html.Raw(Json.Serialize(Model.CategoriesDropdown))
                 .map(function (item) {
             return { id: item.value, text: item.text };
@@ -108,7 +107,6 @@
 
         $("#categoryIdDropDown").val("").trigger("change");
 
-        // Initialize Supplier Dropdown
         var supplierData = @Html.Raw(Json.Serialize(Model.SuppliersDropdown))
                 .map(function (item) {
             return { id: item.value, text: item.text };
@@ -138,19 +136,16 @@
     }
 
     $(document).ready(function () {
-        // Initialize select2 dropdowns when the modal is shown
         $('#generalModalLG').on('shown.bs.modal', function () {
             initializeSelect2Dropdowns();
         });
 
-        // Optionally clear modal content on modal hide
         $('#generalModalLG').on('hidden.bs.modal', function () {
-            $(this).find('.modal-body').empty(); // Clear modal body to avoid conflicts
+            $(this).find('.modal-body').empty();
         });
 
-        // Handle form submission
         $('#addProductForm').submit(function (e) {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
             var formData = new FormData(e.currentTarget);
 
             console.log('Form data:', formData);
@@ -163,15 +158,12 @@
                 contentType: false,
                 success: function (response) {
                     if (response.success) {
-                        // Hide modal and redirect
                         $("#generalModalLG").modal('hide');
                         window.location.href = response.redirectUrl;
                     } else {
-                        // Load new modal content
                         var modalBodyContent = $(response).find('.modal-body').html();
                         $('#generalModalLG .modal-body').html(modalBodyContent);
 
-                        // Show modal and reinitialize dropdowns
                         $('#generalModalLG').modal('show');
                         initializeSelect2Dropdowns();
                     }
@@ -179,7 +171,6 @@
                 error: function (error) {
                     console.error('Error submitting the form:', error);
 
-                    // Optional: Inform the user of the error
                     alert('An error occurred while submitting the form. Please try again.');
                 }
             });

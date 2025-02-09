@@ -118,9 +118,15 @@ namespace NorthwindMVC.Web.Controllers
             var modelDelete = await _categoryService.GetById(id);
             try
             {
-                await _photoService.DeletePhotoAsync(modelDelete.PhotoPath);
-                await _categoryService.Delete(modelDelete);
-                _toastr.Success("Uspješno obrisano!");
+                var isDeleted = await _categoryService.Delete(modelDelete);
+                if (isDeleted)
+                {
+                    _toastr.Success(_translate["DeleteSuccessful"]);
+                }
+                else
+                {
+                    _toastr.Danger(_translate["DeleteFailed"]);
+                }
                 return Json(new { success = true, redirectUrl = Url.Action("Index", "Category") });
             }
             catch (Exception ex)

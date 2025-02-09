@@ -40,7 +40,12 @@ namespace NorthwindMVC.Web.Controllers
             return View("Index", pagedShippers);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 10, string searchTerm = "")
+        {
+            return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm});
+        }
+
+        public async Task<IActionResult> EditView(int id)
         {
             var shipper = await _shipperService.GetShipperById(id);
             var shipperVM = _mapper.Map<ShipperViewModel>(shipper);
@@ -81,7 +86,7 @@ namespace NorthwindMVC.Web.Controllers
             return Json(new { success = true, redirectUrl = Url.Action("Index", "Shipper") });
         }
 
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> AddView()
         {
             return PartialView("_add");
         }

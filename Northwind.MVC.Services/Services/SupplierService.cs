@@ -25,6 +25,12 @@ namespace NorthwindMVC.Services.Services
 
 		public async Task<bool> Delete(Supplier supplier)
 		{
+			var hasProducts = await UnitOfWork.ProductRepository.AnyAsync(e => e.SupplierId == supplier.Id);
+			if(hasProducts)
+			{
+				return false;
+			}
+
 			await UnitOfWork.SupplierRepository.DeleteAsync(supplier);
 			await UnitOfWork.SaveChangesAsync();
 			return true;

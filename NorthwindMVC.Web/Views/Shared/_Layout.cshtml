@@ -109,7 +109,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon 	fas fa-balance-scale"></i>
                                 <p>
-                                    Products
+                                    @Translate["Products"]
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -117,43 +117,13 @@
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="Product" class="nav-link">
                                         <i class="fas fa-boxes nav-icon"></i>
-                                        <p>All products</p>
+                                        <p>@Translate["Products"]</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-laptop nav-icon"></i>
-                                        <p>Electronics</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-hamburger nav-icon"></i>
-                                        <p>Food</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-couch nav-icon"></i>
-                                        <p>Furniture</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-car nav-icon"></i>
-                                        <p>Vehicles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-tshirt nav-icon"></i>
-                                        <p>Clothing</p>
-                                    </a>
-                                </li>
+                                </li>                              
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="Category" class="nav-link">
                                         <i class="fas fa-expand-arrows-alt nav-icon"></i>
-                                        <p>Other categories</p>
+                                        <p>@Translate["Categories"]</p>
                                     </a>
                                 </li>
                             </ul>

@@ -1,4 +1,5 @@
-﻿using NorthwindMVC.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthwindMVC.Core.Models;
 using NorthwindMVC.Core.Pagination;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 
@@ -39,9 +40,10 @@ namespace NorthwindMVC.Services.Services
 		public async Task<PagedList<Product>> GetPagedProducts(int pageNumber, int pageSize, string searchTerm, int? categoryId)
 		{
 			string? normalizedSearchTerm = searchTerm?.ToLower();
-			var query = UnitOfWork.ProductRepository.Find(p =>
-				string.IsNullOrEmpty(normalizedSearchTerm) ||
-				p.ProductName.ToLower().Contains(normalizedSearchTerm));
+			var query = UnitOfWork.ProductRepository
+				.Find(p =>
+					string.IsNullOrEmpty(normalizedSearchTerm) ||
+					p.ProductName.ToLower().Contains(normalizedSearchTerm));
 
 			if (categoryId.HasValue)
 			{

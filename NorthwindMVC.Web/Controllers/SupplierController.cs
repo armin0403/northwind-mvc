@@ -100,22 +100,20 @@ namespace NorthwindMVC.Web.Controllers
         public async Task<IActionResult> Delete(Supplier supplier)
         {
             var supplierDelete = await _supplierService.GetByIdAsync(supplier.Id);
-
-            try
+                        
+            var isDeleted = await _supplierService.Delete(supplierDelete);
+            if (isDeleted)
             {
-                await _supplierService.Delete(supplierDelete);
-
-                _toastr.Success(_translate["DeleteSuccessful"]);
-                return Json(new { success = true, redirectUrl = Url.Action("Index", "Supplier") });
+			    _toastr.Success(_translate["DeleteSuccessful"]);
             }
-            catch (Exception ex)
+            else
             {
-                return RedirectToAction("Index", ex);
-            }
-           
-        }
+			    _toastr.Danger(_translate["DeleteFailed"]);
+			}
+			return Json(new { success = true, redirectUrl = Url.Action("Index", "Supplier") });
+		}
 
-        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5, string searchTerm = "")
+		public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 5, string searchTerm = "")
         {
             return RedirectToAction("Index", new { pageNumber, pageSize, searchTerm });
         }

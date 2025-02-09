@@ -1,5 +1,6 @@
 ﻿using NorthwindMVC.Core.Models;
 using NorthwindMVC.Core.Pagination;
+using NorthwindMVC.Infrastructure;
 using NorthwindMVC.Infrastructure.UnitOfWork;
 
 namespace NorthwindMVC.Services.Services
@@ -8,11 +9,18 @@ namespace NorthwindMVC.Services.Services
     {
         private readonly IUnitOfWork UnitOfWork;
         private readonly IPaginationService _paginationService;
-        public CategoryService(IUnitOfWork unitOfWork,
-                               IPaginationService paginationService) 
+		private readonly IPhotoService _phototService;
+		private readonly NorthwindDbContext _dbContext;
+
+		public CategoryService(IUnitOfWork unitOfWork,
+                               IPaginationService paginationService,
+                               IPhotoService photoService,
+                               NorthwindDbContext dbContext) 
         {
             this.UnitOfWork = unitOfWork;
             _paginationService = paginationService;
+            _phototService = photoService;
+            _dbContext = dbContext;
         }
 
         public async Task<bool> Add(Category category)
@@ -24,9 +32,29 @@ namespace NorthwindMVC.Services.Services
 
         public async Task<bool> Delete(Category category)
         {
-            await UnitOfWork.CategoryRepository.DeleteAsync(category);
-            await UnitOfWork.SaveChangesAsync();
-            return true;
+            using(var Transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+					var hasProducts = await UnitOfWork.ProductRepository.AnyAsync(p => p.CategoryId == category.Id);
+					if (hasProducts)
+					{
+						return false;
+					}
+					await _phototService.DeletePhotoAsync(category.PhotoPath);
+					await UnitOfWork.CategoryRepository.DeleteAsync(category);
+					await UnitOfWork.SaveChangesAsync();
+
+                    await Transaction.CommitAsync();
+					return true;
+				}
+                catch
+                {
+                    Transaction.Rollback();
+                    return false;
+                }
+            }
+            
         }
 
         public async Task<Category> GetById(int id)
