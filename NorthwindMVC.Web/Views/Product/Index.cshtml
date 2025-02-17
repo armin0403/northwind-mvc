@@ -7,7 +7,7 @@
 <div class="col-md-12">
 	<form asp-action="Search" asp-controller="Product" method="get">
 		<div class="input-group">
-			<input type="search" name="searchTerm" class="form-control form-control-lg" placeholder="@Translate["SearchProduct"]">
+			<input type="search" name="searchTerm" class="form-control form-control-lg" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchProduct"]">
 			<div class="input-group-append">
 				<button type="submit" class="btn btn-lg btn-default">
 					<i class="fa fa-search"></i>
@@ -28,32 +28,33 @@
 		<button type="submit" class="btn btn-lg btn-default"><i class="fas fa-filter"></i></button>
 	</form>
 </div>
-<div class="card">
-
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>@Translate["ProductName"]</th>
-			<th>@Translate["UnitsInStock"]</th>
-			<th>@Translate["Price"]</th>
-		</tr>
-	</thead>
-	<tbody>
-	@foreach(var product in Model.Products.Items)
-	{
-	<tr class="context-menu-row"
-		data-id="@product.Id"
-		data-controller="Product">
-		<td>@product.ProductName</td>
-		<td>@product.UnitsInStock</td>
-		<td>@product.UnitPrice</td>
-	</tr>		
-	}		
-	</tbody>
-	<tfoot>
+<div class="col-12">
+	<div class="card">
+		<table id="example2" class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>@Translate["ProductName"]</th>
+					<th>@Translate["Category"]</th>
+					<th>@Translate["UnitsInStock"]</th>
+					<th>@Translate["Price"]</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var product in Model.Products.Items)
+				{
+					<tr class="context-menu-row"
+						data-id="@product.Id"
+						data-controller="Product">
+						<td>@product.ProductName</td>
+						<td>@product.Category.CategoryName</td>
+						<td>@product.UnitsInStock</td>
+						<td>@product.UnitPrice</td>
+					</tr>
+				}
+			</tbody>			
+		</table>
 		@Html.DisplayFor(e => e.Products.Pager)
-	</tfoot>
-</table>
+	</div>
 </div>
 <script>
 	function initializeSelect2() {

@@ -34,7 +34,7 @@ namespace NorthwindMVC.Web.Controllers
             _dropdownService = dropdownService;
             _translate = translate;
         }
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm = "", int? categoryId = null)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3, string searchTerm = "", int? categoryId = null)
         {
             var products = await _productService.GetPagedProducts(pageNumber, pageSize, searchTerm, categoryId);
             var categoriesDropDown = (await _dropdownService.GetCategoriesDropdownList(null)).Take(5);
@@ -47,7 +47,7 @@ namespace NorthwindMVC.Web.Controllers
 			return View(productsVM);
         }
 
-        public async Task<IActionResult> Search(int pageNumber=1, int pageSize= 10, string searchTerm = "", int? categoryId = null)
+        public async Task<IActionResult> Search(int pageNumber=1, int pageSize= 3, string searchTerm = "", int? categoryId = null)
         {
             return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm, categoryId});
         }

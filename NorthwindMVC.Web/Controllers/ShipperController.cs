@@ -34,13 +34,13 @@ namespace NorthwindMVC.Web.Controllers
             _mapper = mapper;
             _translate = translate;
         }
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm ="")
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3, string searchTerm ="")
         {
             var pagedShippers = await _shipperService.GetPagedShippers(pageNumber, pageSize, searchTerm);
             return View("Index", pagedShippers);
         }
 
-        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 10, string searchTerm = "")
+        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = 3, string searchTerm = "")
         {
             return RedirectToAction("Index", new {pageNumber, pageSize, searchTerm});
         }

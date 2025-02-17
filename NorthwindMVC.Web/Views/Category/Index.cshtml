@@ -3,7 +3,7 @@
 <div class="col-md-12">
 <form asp-action="Search" asp-controller="Category" method="get">
 	<div class="input-group">
-		<input type="search" name="searchTerm" class="form-control form-control-lg" placeholder="@Translate["SearchCategory"]">
+			<input type="search" name="searchTerm" class="form-control form-control-lg" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchCategory"]">
 		<div class="input-group-append">
 			<button type="submit" class="btn btn-lg btn-default">
 				<i class="fa fa-search"></i>

@@ -1,36 +1,36 @@
 ﻿@model PagedList<NorthwindMVC.Core.Models.Employee>
+@await Html.PartialAsync("DisplayTemplates/_ContextMenu")
+@await Html.PartialAsync("DisplayTemplates/_generalModalLG")
+@await Html.PartialAsync("DisplayTemplates/_generalModal")
 
 <section class="content">
     <div class="container-fluid">
        <div class="row">
           <div class="col-12">
              <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">@Translate["EmployeeTable"]</h3>
-                    </div>
+                <div class="card-header">
+                    <h3 class="card-title">@Translate["EmployeeTable"]</h3>
+                </div>
                 <div class="card-body">
-                  <div class="row mb-3">
+                <div class="row mb-3">
                     <div class="col-sm-6 d-flex align-items-center">
-                        <button data-toggle="modal" data-target="#generalModalLG" data-action="add" class="btn btn-secondary btn-sm"> 
+                        <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#generalModalLG" data-action="add">
                             <i class="fas fa-user-plus"></i> @Translate["AddEmployee"]
                         </button>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end align-items-center">
                         <form asp-action="Search" asp-controller="Employee" method="get" style="display: flex; margin: 0; padding: 0;">
                             <div class="input-group input-group-sm" style="width: 250px;">
-                                <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["Search"]" />
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-outline-secondary">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
+                                <input class="form-control" type="text" name="searchTerm" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchSupplier"]" />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                             </div>
                         </form>
                     </div>
-                  </div>
-                  @await Html.PartialAsync("DisplayTemplates/_ContextMenu")
-                  @await Html.PartialAsync("DisplayTemplates/_generalModalLG")
-                  @await Html.PartialAsync("DisplayTemplates/_generalModal")
+                </div>                  
                   <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
@@ -57,14 +57,7 @@
                     </tr>
                   }                                
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>@Translate["FirstName"]</th>
-                    <th>@Translate["LastName"]</th>
-                    <th>@Translate["Dateofbirth"]</th>
-                    <th>@Translate["Title"]</th>
-                    <th>@Translate["HomePhone"]</th>
-                  </tr>
+                  <tfoot>                  
                   </tfoot>
                   </table>
                 </div>

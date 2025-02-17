@@ -2,7 +2,7 @@
 
 <form id="editProductForm">
     <div class="modal-header">
-        <h4 class="modal-title">@Translate["EditEmployee"]</h4>
+        <h4 class="modal-title">@Translate["EditProduct"]</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -64,7 +64,8 @@
                 <div class="form-group">
                     <label>@Translate["Discontinued"]</label>
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="Discontinued" value="false">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="Discontinued">
+                        <label class="custom-control-label" for="customSwitch1"></label>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 @await Html.PartialAsync("DisplayTemplates/_contextMenu")
 @await Html.PartialAsync("DisplayTemplates/_generalModalLG")
 @await Html.PartialAsync("DisplayTemplates/_generalModal")
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -20,7 +21,7 @@
                             <div class="col-sm-6 d-flex justify-content-end align-items-center">
                                 <form asp-action="Search" asp-controller="Supplier" method="get" style="display: flex; margin: 0; padding: 0;">
                                     <div class="input-group input-group-sm" style="width: 250px;">
-                                        <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["SearchSupplier"]" />
+                                        <input class="form-control" type="text" name="searchTerm" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchSupplier"]" />
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-outline-secondary">
                                                 <i class="fas fa-search"></i>
@@ -53,19 +54,10 @@
                                         <td>@supplier.HomePage</td>
                                     </tr>
                                 }                                
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>@Translate["CompanyName"]</th>
-                                    <th>@Translate["ContactName"]</th>
-                                    <th>@Translate["Address"]</th>
-                                    <th>@Translate["Phone"]</th>
-                                    <th>@Translate["HomePage"]</th>
-                                </tr>
-                            </tfoot>
-                            @Html.DisplayFor(e=>e.Pager)
+                            </tbody>                            
                         </table>
                     </div>
+                    @Html.DisplayFor(e => e.Pager)
                 </div>
             </div>
         </div>

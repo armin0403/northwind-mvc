@@ -50,6 +50,8 @@ namespace NorthwindMVC.Services.Services
 				query = query.Where(p => p.CategoryId == categoryId.Value);
 			}
 
+			query = query.Include(c => c.Category);
+
 			var pagedProducts = _paginationService.CreatePagedList(query,pageNumber,pageSize);
 			return pagedProducts;
 		}

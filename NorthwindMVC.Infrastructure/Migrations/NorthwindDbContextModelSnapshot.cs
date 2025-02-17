@@ -44,7 +44,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Employee", b =>
@@ -123,7 +123,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("ReportsToId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.EmployeeTerritory", b =>
@@ -144,7 +144,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
                     b.HasIndex("EmployeeId", "TerritoryId")
                         .IsUnique();
 
-                    b.ToTable("EmployeeTerritories");
+                    b.ToTable("EmployeeTerritories", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Product", b =>
@@ -190,7 +190,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Region", b =>
@@ -207,7 +207,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Regions");
+                    b.ToTable("Regions", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Shipper", b =>
@@ -228,7 +228,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shippers");
+                    b.ToTable("Shippers", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Supplier", b =>
@@ -285,7 +285,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Territory", b =>
@@ -307,7 +307,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("RegionId");
 
-                    b.ToTable("Territories");
+                    b.ToTable("Territories", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Role", b =>
@@ -329,7 +329,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.User", b =>
@@ -369,7 +369,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.UserRole", b =>
@@ -392,7 +392,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Employee", b =>

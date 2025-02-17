@@ -1,87 +1,78 @@
 ﻿@model PagedList<NorthwindMVC.Core.Models.Shipper>
+@await Html.PartialAsync("DisplayTemplates/_generalModal")
+@await Html.PartialAsync("DisplayTemplates/_generalModalLG")
+@await Html.PartialAsync("DisplayTemplates/_ContextMenu")
 
-<div class="card col-md-12">
-    <div class="card-header">
-        <h5 class="card-title">@Translate["Shippers"]</h5>
-        <div class="card-tools d-flex justify-content-end align-items-center">
-            <div>
-            <form asp-action="Search" asp-controller="Shipper" method="get" class="d-flex m-0 p-0">
-                <div class="input-group" style="width: 250px;">
-                    <input class="form-control" type="text" name="searchTerm" placeholder="@Translate["Search"]" aria-label="Search Shippers" />
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary" aria-label="Search">
-                            <i class="fas fa-search"></i>
-                        </button>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">@Translate["Shippers"]</h5>                        
                     </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-6 d-flex align-items-center">
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#generalModal" data-action="add">
+                                    <i class="fas fa-user-plus"></i> @Translate["AddShipper"]
+                                </button>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                                <form asp-action="Search" asp-controller="Shipper" method="get" style="display: flex; margin: 0; padding: 0;">
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input class="form-control" type="text" name="searchTerm" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchSupplier"]" />
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-outline-secondary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    @Translate["ShipperName"]
+                                </th>
+                                <th>
+                                    @Translate["ShipperContact"]
+                                </th>                    
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var shipper in Model.Items)
+                            {
+                            <tr class="context-menu-row"
+                            data-id="@shipper.Id"
+                            data-controller="Shipper">                                                     
+                                <td>
+                                    <a>
+                                        @shipper.CompanyName
+                                    </a>                            
+                                </td>
+                                <td>
+                                    @shipper.Phone
+                                </td>                        
+                            </tr>
+                            }          
+                            </tbody>
+            
+                        </table>
+                    </div>
+                    @Html.DisplayFor(e => e.Pager)
+
                 </div>
-            </form>
             </div>
-            <button data-toggle="modal" data-target="#generalModal" data-action="add" class="btn btn-secondary ml-2" aria-label="Add Shipper">
-                @Translate["AddShipper"]
-                <i class="fas fa-plus"></i>
-                <i class="fas fa-shipping-fast"></i>
-            </button>
         </div>
     </div>
-    @await Html.PartialAsync("DisplayTemplates/_generalModal")
-    @await Html.PartialAsync("DisplayTemplates/_generalModalLG")
-    @await Html.PartialAsync("DisplayTemplates/_ContextMenu")
-    <div class="card-body p-0">
-        <table id="example2" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th style="width: 1%">
-                        #
-                    </th>
-                    <th>
-                        @Translate["ShipperName"]
-                    </th>
-                    <th>
-                        @Translate["ShipperContact"]
-                    </th>                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var shipper in Model.Items)
-                {
-                    <tr class="context-menu-row"
-                        data-id="@shipper.Id"
-                        data-controller="Shipper">
-                        <td>
-                            #
-                        </td>                        
-                        <td>
-                            <a>
-                                @shipper.CompanyName
-                            </a>                            
-                        </td>
-                        <td>
-                            @shipper.Phone
-                        </td>                        
-                    </tr>
-                }                
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th style="width: 1%">
-                        #
-                    </th>
-                    <th>
-                        @Translate["ShipperName"]
-                    </th>
-                    <th>
-                        @Translate["ShipperContact"]
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div class="card-footer">
-        <div class="form-group">
-            @Html.DisplayFor(e=>e.Pager)
-        </div>
-    </div>
-</div>
+</section>
+
+
+
+
 <script>
     $(document).ready(function () {
 
