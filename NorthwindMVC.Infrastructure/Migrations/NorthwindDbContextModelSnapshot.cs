@@ -22,6 +22,31 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories", (string)null);
+                });
+
             modelBuilder.Entity("NorthwindMVC.Core.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -98,10 +123,31 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("ReportsToId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.EmployeeTerritory", b =>
+                {
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TerritoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EmployeeId", "TerritoryId");
+
+                    b.HasIndex("TerritoryId");
+
+                    b.HasIndex("EmployeeId", "TerritoryId")
+                        .IsUnique();
+
+                    b.ToTable("EmployeeTerritories", (string)null);
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,19 +155,42 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TerritoryId")
+                    b.Property<bool>("Discontinued")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("QuantityPerUnit")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ReOrderLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("UnitPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UnitsInStock")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UnitsOnOrder")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("TerritoryId");
+                    b.HasIndex("SupplierId");
 
-                    b.ToTable("EmployeeTerritories");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Region", b =>
@@ -138,7 +207,85 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Regions");
+                    b.ToTable("Regions", (string)null);
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Shipper", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shippers", (string)null);
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContactTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HomePage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Territory", b =>
@@ -160,7 +307,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("RegionId");
 
-                    b.ToTable("Territories");
+                    b.ToTable("Territories", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Role", b =>
@@ -182,7 +329,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.User", b =>
@@ -222,7 +369,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.UserRole", b =>
@@ -245,7 +392,7 @@ namespace NorthwindMVC.Infrastucture.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Employee", b =>
@@ -260,13 +407,13 @@ namespace NorthwindMVC.Infrastucture.Migrations
             modelBuilder.Entity("NorthwindMVC.Core.Models.EmployeeTerritory", b =>
                 {
                     b.HasOne("NorthwindMVC.Core.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("EmployeeTerritories")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("NorthwindMVC.Core.Models.Territory", "Territory")
-                        .WithMany()
+                        .WithMany("EmployeeTerritories")
                         .HasForeignKey("TerritoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -274,6 +421,25 @@ namespace NorthwindMVC.Infrastucture.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Territory");
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Product", b =>
+                {
+                    b.HasOne("NorthwindMVC.Core.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NorthwindMVC.Core.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.Models.Territory", b =>
@@ -311,6 +477,16 @@ namespace NorthwindMVC.Infrastucture.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Employee", b =>
+                {
+                    b.Navigation("EmployeeTerritories");
+                });
+
+            modelBuilder.Entity("NorthwindMVC.Core.Models.Territory", b =>
+                {
+                    b.Navigation("EmployeeTerritories");
                 });
 
             modelBuilder.Entity("NorthwindMVC.Core.User", b =>

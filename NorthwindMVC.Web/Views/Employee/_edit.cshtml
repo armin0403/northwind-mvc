@@ -1,0 +1,168 @@
+﻿@model NorthwindMVC.Web.ViewModels.EmployeeViewModel
+
+
+<div class="modal-header">
+	<h3 class="card-title">@Translate["EditEmployee"]</h3>
+</div>
+<form asp-action="Edit" asp-controller="Employee" method="post" enctype="multipart/form-data">
+	<div class="modal-body">
+		<div class="row">
+			<input type="hidden" asp-for="Id" />
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>@Translate["FirstName"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["FirstName"]" asp-for="FirstName" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["LastName"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["LastName"]" asp-for="LastName" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["Title"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Title"]" asp-for="Title" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["TitleOfCourtesy"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["TitleOfCourtesy"]" asp-for="TitleOfCourtesy" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["Dateofbirth"]</label>
+					<div class="input-group date" id="dateofbirthdatetimepicker" data-target-input="nearest">
+						<input type="text" class="form-control datetimepicker-input" data-target="#dateofbirthdatetimepicker" asp-for="DateOfBirth" />
+						<div class="input-group-append" data-target="#dateofbirthdatetimepicker" data-toggle="datetimepicker">
+							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>@Translate["HireDate"]</label>
+					<div class="input-group date" id="hiredatetimepicker" data-target-input="nearest">
+						<input type="text" class="form-control datetimepicker-input" data-target="#hiredatetimepicker" asp-for="HireDate" />
+						<div class="input-group-append" data-target="#hiredatetimepicker" data-toggle="datetimepicker">
+							<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>@Translate["ReportsTo"]</label>
+					<select class="select2" style="width: 100%;" id="reportsToId" asp-for="ReportsToId" asp-items="Model.EmployeeDropdown">
+						<option value="" selected>None</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Notes"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Notes"]" asp-for="Notes" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["HomePhone"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["HomePhone"]" asp-for="HomePhone" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["Extension"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Extension"]" asp-for="Extension" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="d-flex justify-content-center align-items-center">
+					<img id="currentPhotoPreview" src="@Url.Content(Model.PhotoPath)" alt="Profile Photo" class="img-thumbnail" style="width: 258; height: 258;" />
+				</div>
+				<div class="d-flex justify-content-center align-items-center">
+					<label>Profile photo</label>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="exampleInputFile" asp-for="PhotoUpload">
+							<label class="custom-file-label" for="exampleInputFile">@Translate["ChooseFile"]</label>
+						</div>
+						<div class="input-group-append">
+							<span class="input-group-text">@Translate["Upload"]</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Address"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Address"]" asp-for="Address" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["City"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["City"]" asp-for="City" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["Region"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Region"]" asp-for="Region" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["PostalCode"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["PostalCode"]" asp-for="PostalCode" />
+				</div>
+				<div class="form-group">
+					<label>@Translate["Country"]</label>
+					<input class="form-control" type="text" placeholder="@Translate["Country"]" asp-for="Country" />
+				</div>
+
+			</div>
+			<div class="col-md-12">
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer justify-content-between">
+		<button type="button" class="btn btn-default" data-dismiss="modal">@Translate["CloseWindow"]</button>
+		<button type="submit" class="btn btn-secondary">@Translate["SaveChanges"]</button>
+	</div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#dateofbirthdatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+        $('#hiredatetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+        bsCustomFileInput.init();
+                
+        document.getElementById("exampleInputFile").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("currentPhotoPreview").src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        var employeeData = @Html.Raw(Json.Serialize(Model.EmployeeDropdown))
+                    .map(function (item) {
+            return { id: item.value, text: item.text };
+        });
+
+        console.log(employeeData);
+
+        $('#reportsToId').select2({
+            placeholder: "Name of manager",
+            data: employeeData,
+            minimumInputLength: 0,
+            ajax: {
+                url: '/Employee/GetEmployeeDropdown',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var results = data.results.slice(0, 5);
+                    return {
+                        results: results
+                    };
+                },
+                cache: true
+            }
+        });
+        var preselectedValue = '@Model.ReportsToId';
+
+        if (preselectedValue) {
+            $('#reportsToId').val(preselectedValue).trigger('change');
+        }
+    });
+</script>

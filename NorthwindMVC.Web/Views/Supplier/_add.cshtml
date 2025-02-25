@@ -1,0 +1,109 @@
+﻿@model NorthwindMVC.Web.ViewModels.SupplierViewModel
+
+<form id="addSupplierForm">
+	<div class="modal-header">
+		<h4 class="modal-title">@Translate["AddNewSupplier"]</h4>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>@Translate["CompanyName"]</label>
+					<input type="text" class="form-control" asp-for="CompanyName" />
+					<span asp-validation-for="ContactName" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["ContactName"]</label>
+					<input type="text" class="form-control" asp-for="ContactName" />
+					<span asp-validation-for="ContactName" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["ContactTitle"]</label>
+					<input type="text" class="form-control" asp-for="ContactTitle" />
+					<span asp-validation-for="ContactTitle" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Phone"]</label>
+					<input type="text" class="form-control" data-inputmask='"mask": "(999) 99-999-999"' data-mask asp-for="Phone">
+					<span asp-validation-for="Phone" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Fax"]</label>
+					<input type="text" class="form-control" asp-for="Fax" />
+					<span asp-validation-for="Fax" class="text-danger"></span>
+				</div>			
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>@Translate["Address"]</label>
+					<input type="text" class="form-control" asp-for="Address" />
+					<span asp-validation-for="Address" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["City"]</label>
+					<input type="text" class="form-control" asp-for="City" />
+					<span asp-validation-for="City" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Region"]</label>
+					<input type="text" class="form-control" asp-for="Region" />
+					<span asp-validation-for="Region" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["PostalCode"]</label>
+					<input type="text" class="form-control" asp-for="PostalCode" />
+					<span asp-validation-for="PostalCode" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label>@Translate["Country"]</label>
+					<input type="text" class="form-control" asp-for="Country" />
+					<span asp-validation-for="Country" class="text-danger"></span>
+				</div>							
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>@Translate["HomePage"]</label>
+					<input type="text" class="form-control" asp-for="HomePage" />
+					<span asp-validation-for="HomePage" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer justify-content-between">
+		<button style="width:25%" type="button" class="btn btn-danger" data-dismiss="modal">@Translate["CloseWindow"]</button>
+		<button style="width:25%" type="submit" class="btn btn-primary">@Translate["AddNewSupplier"]</button>
+	</div>
+</form>
+<script>
+	$(document).ready(function () {
+		$('[data-mask]').inputmask();
+
+		$('#addSupplierForm').submit(function (e) {
+			e.preventDefault();
+			var formData = new FormData(e.currentTarget);
+			$.ajax({
+				type: "POST",
+				url: '/Supplier/Add',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function (response) {
+					if (response.success) {
+						$("#generalModalLG").modal('hide')
+						window.location.href = response.redirectUrl;
+					} else {
+						var modalBodyContent = $(response).find('.modal-body').html();
+						$('#generalModalLG .modal-body').html(modalBodyContent);
+						$('#generalModalLG').modal('show');
+					}
+				},
+				error: function (error) {
+					console.error('Error submitting form', error);
+				}
+			});
+		});
+	});
+</script>
