@@ -4,21 +4,33 @@ using NorthwindMVC.Web.Helpers;
 
 public class DropdownService : IDropdownService
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork UnitOfWork;
 
     public DropdownService(IUnitOfWork unitOfWork)
     {
-        this.unitOfWork = unitOfWork;
+        this.UnitOfWork = unitOfWork;
+    }
+
+    public async Task<IEnumerable<SelectListItem>> GetCategoriesDropdownList(string? searchTerm)
+    {
+        var query = UnitOfWork.CategoryRepository.Find(c =>
+        string.IsNullOrWhiteSpace(searchTerm) ||
+        c.CategoryName.ToLower().Contains(searchTerm));
+
+        return query.Select(c => new SelectListItem
+        {
+            Value = c.Id.ToString(),
+            Text = c.CategoryName,
+        });
     }
 
     public async Task<IEnumerable<SelectListItem>> GetEmployeesDropdownList(string? searchTerm)
     {
-        var query = unitOfWork.EmployeeRepository.Find(e =>
+        var query = UnitOfWork.EmployeeRepository.Find(e =>
             string.IsNullOrWhiteSpace(searchTerm) ||
             e.FirstName.ToLower().Contains(searchTerm) ||
             e.LastName.ToLower().Contains(searchTerm)); //querable
-
-        
+              
 
         return query.Select(e => new SelectListItem
         {
@@ -27,4 +39,16 @@ public class DropdownService : IDropdownService
         });
     }
 
+    public async Task<IEnumerable<SelectListItem>> GetSuppliersDropdownList(string? searchTerm)
+    {
+        var query = UnitOfWork.SupplierRepository.Find(s =>
+        string.IsNullOrWhiteSpace(searchTerm) ||
+        s.CompanyName.ToLower().Contains(searchTerm));
+
+        return query.Select(s => new SelectListItem
+        {
+            Value = s.Id.ToString(),
+            Text = s.CompanyName,
+        });
+    }
 }

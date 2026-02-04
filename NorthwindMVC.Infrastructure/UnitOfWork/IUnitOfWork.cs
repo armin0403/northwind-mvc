@@ -6,6 +6,10 @@ namespace NorthwindMVC.Infrastructure.UnitOfWork
     {
         IUserRepository UserRepository { get; }
         IEmployeeRepository EmployeeRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IProductRepository ProductRepository { get; }
+        IShipperRepository ShipperRepository { get; }
+        ISupplierRepository SupplierRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }

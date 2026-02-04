@@ -1,0 +1,122 @@
+﻿@model NorthwindMVC.Web.ViewModels.ProductViewModel
+
+@await Html.PartialAsync("DisplayTemplates/_generalModalLG")
+@await Html.PartialAsync("DisplayTemplates/_generalModal")
+@await Html.PartialAsync("DisplayTemplates/_ContextMenu")
+
+<div class="col-md-12">
+	<form asp-action="Search" asp-controller="Product" method="get">
+		<div class="input-group">
+			<input type="search" name="searchTerm" class="form-control form-control-lg" value="@Context.Request.Query["searchTerm"]" placeholder="@Translate["SearchProduct"]">
+			<div class="input-group-append">
+				<button type="submit" class="btn btn-lg btn-default">
+					<i class="fa fa-search"></i>
+				</button>
+				<button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#generalModalLG" data-action="add">
+					<i class="fas fa-folder-plus"></i>
+					@Translate["AddNewProduct"]
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-sm-3 d-flex align-items-center">
+	<form asp-action="Search" asp-controller="Product" method="get" class="d-flex w-100">
+		<select class="select2 form-control me-2" style="width: 100%;" id="categoryIdDropDown" asp-for="CategoryId" asp-items="Model.CategoriesDropdown">
+			<option value="" selected></option>
+		</select>
+		<button type="submit" class="btn btn-lg btn-default"><i class="fas fa-filter"></i></button>
+	</form>
+</div>
+<div class="col-12">
+	<div class="card">
+		<table id="example2" class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>@Translate["ProductName"]</th>
+					<th>@Translate["Category"]</th>
+					<th>@Translate["UnitsInStock"]</th>
+					<th>@Translate["Price"]</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var product in Model.Products.Items)
+				{
+					<tr class="context-menu-row"
+						data-id="@product.Id"
+						data-controller="Product">
+						<td>@product.ProductName</td>
+						<td>@product.Category.CategoryName</td>
+						<td>@product.UnitsInStock</td>
+						<td>@product.UnitPrice</td>
+					</tr>
+				}
+			</tbody>			
+		</table>
+		@Html.DisplayFor(e => e.Products.Pager)
+	</div>
+</div>
+<script>
+	function initializeSelect2() {
+		var categoryData = @Html.Raw(Json.Serialize(Model.CategoriesDropdown))
+						.map(function (item) {
+			return { id: item.value, text: item.text };
+		});
+
+		$('#categoryIdDropDown').select2({
+			placeholder: "Name of category",
+			data: categoryData,
+			minimumInputLength: 0,
+			ajax: {
+				url: '/Product/GetCategoryDropdown',
+				dataType: 'json',
+				delay: 250,
+				data: function (params) {
+					return {
+						searchTerm: params.term
+					};
+				},
+				processResults: function (data) {
+					var results = data.results.slice(0, 5);
+					return {
+						results: results
+					};
+				},
+				cache: true
+			}
+		});
+
+		$("#categoryIdDropDown").val("").trigger("change");
+	}
+
+
+	$(document).ready(function () {
+
+		initializeSelect2();
+
+		
+
+		$('#generalModalLG').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget);
+			var action = button.data('action');
+			var modal = $(this);
+
+			if (action === 'add') {
+				$.ajax({
+					url: '/Product/AddView',
+					type: 'GET',
+					success: function (response) {
+						modal.find('.modal-content').html(response);
+						modal.modal('show');
+					},
+					error: function () {
+						console.error('Failed to load content.')
+					}
+				});
+			}
+
+		});
+
+	});
+
+</script>

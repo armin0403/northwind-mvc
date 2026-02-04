@@ -8,6 +8,10 @@ namespace NorthwindMVC.Web
         {
             UserConfig.UserMapperConfig();
             EmployeeConfig.EmployeeMapperConfig();
+            CategoryConfig.CategoryMapperConfig();
+            ProductConfig.ProductMapperConfig();
+            ShipperConfig.ShipperMapperConfig();
+            SupplierConfig.SupplierMapperConfig();
         }
     }
 }

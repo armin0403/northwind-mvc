@@ -1,0 +1,103 @@
+﻿@model NorthwindMVC.Web.ViewModels.CategoryViewModel
+
+<form id="addCategoryForm" method="post" enctype="multipart/form-data">
+<div class="modal fade" id="add_CategoryModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@Translate["AddNewCategory"]</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img id="currentPhotoPreview" src="@Url.Content("~/uploads/no-photo.png")" alt="Profile Photo" class="img-thumbnail" style="width: 258; height: 258;" />
+                    </div>
+                </div>                    
+                <div class="form-group">
+                    <label>@Translate["CategoryPhoto"]</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="Photo">
+                            <label class="custom-file-label" for="exampleInputFile">@Translate["ChooseFile"]</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">@Translate["Upload"]</span>
+                        </div>
+                    </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["CategoryName"]</label>
+                    <input class="form-control" type="text" asp-for="CategoryName" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>@Translate["CategoryDescription"]</label>
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Translate["CloseWindow"]</button>
+                <button type="submit" class="btn btn-primary">@Translate["AddNewCategory"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+        
+        document.getElementById("exampleInputFile").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("currentPhotoPreview").src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+        // Submit the form with AJAX
+        $("#addCategoryForm").submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Create a FormData object with the form data
+            var formData = new FormData(e.currentTarget);
+            console.log("FormData:", formData); // Log the FormData to the console
+
+            // Perform AJAX request to submit the form
+            $.ajax({
+                type: "POST",  // Set HTTP method to POST
+                url: '/Category/Add',  // Server-side endpoint that handles form submission
+                data: formData,  // Send the form data in the request
+                processData: false,  // Don't process the data, keep it in FormData format
+                contentType: false,  // Set content type to false so jQuery won't add its default content type
+                success: function (response) {
+                    console.log("Response:", response);  // Log the server's response
+
+                    if (response.success) {
+                        // If the response indicates success, hide the modal
+                        $('#add_CategoryModal').modal('hide');
+                        window.location.href = response.redirectUrl;
+
+                    } else {
+                        // If the response contains validation errors, update the modal body
+                        var modalBodyContent = $(response).find('.modal-body').html();
+                        $('#add_CategoryModal .modal-body').html(modalBodyContent); // Inject the updated modal body content
+                        $('#add_CategoryModal').modal('show'); // Ensure the modal is shown after updating its content
+                    }
+                },
+                error: function (error) {
+                    console.error('Error submitting form:', error);  // Log any error during the AJAX request
+                }
+            });
+        });
+    });
+
+
+</script>

@@ -55,6 +55,6 @@ namespace NorthwindMVC.Infrastructure.Repositories
         public async Task UpdateAsync(TEntity entity)
         {
            _dbContext.Set<TEntity>().Update(entity);
-        }
+        }        
     }
 }

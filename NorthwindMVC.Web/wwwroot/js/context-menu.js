@@ -1,50 +1,54 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
-    const contextMenu = document.getElementById('contextMenu');
-    const deleteModal = $('#modal-sm');
+﻿$(document).ready(function () {
 
-    const closeMenu = function (event) {
-        if (!contextMenu.contains(event.target)) {
-            contextMenu.style.display = 'none';
-            document.removeEventListener('click', closeMenu);
-        }
-    };
+    let rowId, controllerName;
 
-    document.querySelectorAll('.context-menu-row').forEach(function (row) {
-        row.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            console.log("Right-clicked row");
+    // Handle right-click to show context menu and extract row data
+    $('.context-menu-row').on('contextmenu', function (e) {
+        e.preventDefault(); // Prevent default right-click menu
 
-            const rowId = row.getAttribute('data-id');
-            const controllerName = row.getAttribute('data-controller');
+        var row = $(this);
+        rowId = row.data('id'); // Extract row ID
+        controllerName = row.data('controller'); // Extract controller name
 
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const menuWidth = contextMenu.offsetWidth;
-            const menuHeight = contextMenu.offsetHeight;
-            let posX = e.pageX;
-            let posY = e.pageY;
-
-            if (posX + menuWidth > viewportWidth) posX = viewportWidth - menuWidth - 10;
-            if (posY + menuHeight > viewportHeight) posY = viewportHeight - menuHeight - 10;
-
-            contextMenu.style.top = `${posY}px`;
-            contextMenu.style.left = `${posX}px`;
-            contextMenu.style.display = 'block';
-
-            document.getElementById('editOption').onclick = function () {
-                console.log("Edit option clicked");
-                const editUrl = `/${controllerName}/Edit?id=${rowId}`;
-                window.location.href = editUrl;
-            };
-
-            document.getElementById('deleteOption').onclick = function () {
-                console.log("Delete option clicked");
-                deleteModal.attr('data-row-id', rowId);
-                deleteModal.attr('data-controller-name', controllerName);
-                deleteModal.modal('show');
-            };
-
-            document.addEventListener('click', closeMenu);
+        $('#contextMenu').css({
+            top: e.pageY + 'px',
+            left: e.pageX + 'px',
+            display: 'block'
         });
+
+        // Close context menu on click outside
+        $(document).on('click', function () {
+            $('#contextMenu').hide();
+        });
+    });
+
+    // Handle menu option click (using delegated event handling)
+    $(document).on('click', '.menu-items', function () {
+        const action = $(this).data('action');
+        let modal, url;
+
+        if (action === 'edit') {
+            modal = $('#generalModalLG');
+            url = `/${controllerName}/EditView`;
+        } else if (action === 'delete') {
+            modal = $('#generalModal');
+            url = `/${controllerName}/DeleteView`;
+        }
+
+        // Perform AJAX request
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: rowId }, // Pass the row ID to the server
+            success: function (response) {
+                modal.find('.modal-content').html(response);
+                modal.modal('show');
+            },
+            error: function () {
+                console.error('Failed to load content.');
+            }
+        });
+
+        $('#contextMenu').hide(); // Hide context menu
     });
 });
